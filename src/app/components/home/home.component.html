@@ -60,11 +60,31 @@
 
     <div class="why">
         <div class="why-headings">
-            <h3>WHY CHOOSE PROTMEALS</h3>
-            <P>Just like home,ProtMeals ensures your food is balanced, fresh, and always on time.</P>
+            <h3>WHY CHOOSE <span>PROTMEALS</span></h3>
+            <p>Just like home, ProtMeals ensures your food is balanced, fresh, and always on time.</p>
         </div>
-        <div class="why-cards"></div>
+        <div class="why-cards">
+            <div class="why-card card-1">
+                <img [src]="whyCards[0].img" alt="">
+                <h4>{{ whyCards[0].head }}</h4>
+                <h4><span class="red-text">{{ whyCards[0].head2 }}</span></h4>
+                <p>{{ whyCards[0].para }}</p>
+            </div>
+            <div class="why-card card-2">
+                <img [src]="whyCards[1].img" alt="">
+                <h4>{{ whyCards[1].head }}</h4>
+                <h4><span class="red-text">{{ whyCards[1].head2 }}</span></h4>
+                <p>{{ whyCards[1].para }}</p>
+            </div>
+            <div class="why-card card-3">
+                <img [src]="whyCards[2].img" alt="">
+                <h4>{{ whyCards[2].head }}</h4>
+                <h4><span class="red-text">{{ whyCards[2].head2 }}</span></h4>
+                <p>{{ whyCards[2].para }}</p>
+            </div>
+        </div>
     </div>
+
 </div>
 
 

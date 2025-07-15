@@ -180,6 +180,82 @@
     color: white;
 }
 
+.why {
+    padding: 3rem 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1e293b;
+}
+
+.why-headings {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.why-headings h3 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.why-headings h3 span {
+    color: #C1282D;
+}
+
+.why-headings p {
+    font-size: 1rem;
+    color: #64748b;
+    margin-top: 0.5rem;
+}
+
+.why-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.why-card {
+    width: 280px;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.card-1 {
+    background-color: rgba(6, 168, 200, 0.1);
+}
+
+.card-2 {
+    background-color: rgba(242, 122, 3, 0.1);
+}
+
+.card-3 {
+    background-color: rgba(73, 197, 112, 0.1);
+}
+
+.why-card img {
+    width: 250px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.why-card h4 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.red-text {
+    color: #C1282D;
+}
+
+.why-card p {
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+
 @media (max-width: 1024px) {
     .hero {
         padding: 3rem 2rem;
