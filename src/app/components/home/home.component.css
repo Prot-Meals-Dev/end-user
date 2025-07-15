@@ -345,10 +345,6 @@
     margin-bottom: 2rem;
 }
 
-.red-text {
-    color: #C1282D;
-}
-
 .meals-homemeals-cards {
     display: flex;
     justify-content: center;
@@ -387,6 +383,71 @@
     color: #64748b;
 }
 
+.lives {
+    background-color: #F9EDE1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem 10rem;
+    flex-wrap: wrap;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.lives-left {
+    flex: 1;
+    min-width: 280px;
+}
+
+.lives-left h3 {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+    color: #1e293b;
+    font-weight: 700;
+}
+
+.lives-left h4 {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+    color: #C1282D;
+    font-weight: 700;
+}
+
+.lives-left ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+.lives-left li {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #1e293b;
+}
+
+.lives-left i {
+    color: #C1282D;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.lives-right {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lives-right img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+}
 
 @media (max-width: 1024px) {
     .hero {
