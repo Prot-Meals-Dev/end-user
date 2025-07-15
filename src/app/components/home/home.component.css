@@ -449,6 +449,77 @@
     height: auto;
 }
 
+.screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    padding: 4rem 2rem;
+    flex-wrap: wrap;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.screen-left {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen-left img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+
+.screen-right {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.screen-right-heading h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1e293b;
+}
+
+.screen-right-because p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #475569;
+}
+
+.screen-right-flex p {
+    font-size: 1.5rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.screen-right-cust p {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #C1282D;
+}
+
+.screen-right-button button {
+    background-color: #C1282D;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.screen-right-button button:hover {
+    background-color: #a32027;
+}
+
 @media (max-width: 1024px) {
     .hero {
         padding: 3rem 2rem;
