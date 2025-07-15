@@ -1,1 +1,36 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/logo.png" alt="Logo" height="100px" class="d-inline-block align-text-top">
+        </a>
+
+        <!-- Toggler + Mobile Login button -->
+        <div class="d-flex align-items-center gap-2 d-lg-none">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Mobile only login -->
+            <button class="btn btn-danger d-lg-none">Login</button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <div class="d-flex ms-auto align-items-center flex-column flex-lg-row gap-3 mt-3 mt-lg-0">
+                <ul class="navbar-nav d-flex flex-row gap-3 mb-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
+                </ul>
+
+                <!-- Desktop only login -->
+                <button class="btn btn-danger d-none d-lg-block">Login</button>
+            </div>
+        </div>
+    </div>
+</nav>
