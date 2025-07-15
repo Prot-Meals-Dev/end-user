@@ -313,6 +313,81 @@
     font-size: 1.3rem;
 }
 
+.meals {
+    padding: 4rem 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+.meals-heading h3 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #1e293b;
+    font-weight: bold;
+}
+
+.meals-protmeals h4 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.meals-protmeals h1 {
+    color: #0000003a;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+}
+
+.meals-homemeals h4 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.red-text {
+    color: #C1282D;
+}
+
+.meals-homemeals-cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.meals-homemeals-card {
+    max-width: 300px;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.meals-homemeals-card:hover {
+    transform: translateY(-5px);
+}
+
+.meals-homemeals-card img {
+    width: 50%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.meals-homemeals-card h5 {
+    margin: 1rem 0 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.meals-homemeals-card p {
+    font-size: 0.95rem;
+    color: #64748b;
+}
+
+
 @media (max-width: 1024px) {
     .hero {
         padding: 3rem 2rem;
