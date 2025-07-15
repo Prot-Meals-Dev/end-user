@@ -259,10 +259,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 6rem;
     padding: 2rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0 auto;
+    flex-wrap: wrap;
+    text-align: center;
 }
 
 .about-left {
@@ -301,16 +303,15 @@
 
 .about-right h2 {
     color: #000000;
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
 }
 
 .about-right p {
     color: #524F4F;
     line-height: 1.6;
-    font-size: 1rem;
+    font-size: 1.3rem;
 }
-
 
 @media (max-width: 1024px) {
     .hero {
@@ -353,5 +354,31 @@
     .hero-bottom button {
         width: 100%;
         text-align: center;
+    }
+
+    .about {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+
+    .about-left h1 {
+        font-size: 2.2rem;
+    }
+
+    .about-right h2 {
+        font-size: 2rem;
+    }
+
+    .about-right p {
+        font-size: 1.1rem;
+    }
+
+    .logo-circle {
+        width: 150px;
+    }
+
+    .logo-circle img {
+        width: 150px;
     }
 }
