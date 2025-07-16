@@ -33,4 +33,32 @@ export class HomeComponent {
       para: 'Only the finest ingredients and highest quality standards in every meal we prepare..'
     },
   ]
+
+  testCards = [
+    {
+      id: 1,
+      img: '/test1.png',
+      stars: 5,
+      name: 'Emily johnson',
+      para: 'Protmeals have completely transformed my daily meal routines.This app offers excellent value, convenience, and reliability'
+    },
+    {
+      id: 2,
+      img: '/test1.png',
+      stars: 5,
+      name: 'Rafel johnson',
+      para: 'The user interface is clean, intuitive, and easy to navigate. I love how it lets me customize my meal preferences and even select the type of meals I want.'
+    },
+    {
+      id: 3,
+      img: '/test1.png',
+      stars: 5,
+      name: 'Ravi johnson',
+      para: 'Its especially helpful for students and working professionals who struggle with timely and healthy food.'
+    },
+  ]
+
+  createStars(count: number): number[] {
+    return Array(count).fill(0);
+  }
 }

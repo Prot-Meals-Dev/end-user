@@ -172,6 +172,25 @@
         </div>
     </div>
 
+    <div class="test">
+        <div class="test-heading">
+            <h4>Hear From Those Who've Experienced the Best</h4>
+        </div>
+        <div class="test-cards">
+            <div class="test-card" *ngFor="let card of testCards">
+                <div class="test-stars">
+                    <i class="bi bi-star-fill" *ngFor="let star of createStars(card.stars)"></i>
+                </div>
+                <div class="test-user">
+                    <img [src]="card.img" alt="{{ card.name }}">
+                    <div class="test-user-name">{{ card.name }}</div>
+                </div>
+                <div class="test-para">{{ card.para }}</div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 
