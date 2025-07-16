@@ -1,1 +1,79 @@
-<p>menu works!</p>
+<div class="container-fluid">
+    <div class="heading text-center my-4">
+        <h3 class="menu-heading">PROTMEALS MENU</h3>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table custom-table text-center align-middle table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Breakfast</th>
+                    <th>Lunch</th>
+                    <th>Dinner</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of menu; let i = index" [ngClass]="{'alt-row': i % 2 !== 0}">
+                    <td class="day-cell">{{ item.day }}</td>
+                    <td>{{ item.breakfast }}</td>
+                    <td>{{ item.lunch }}</td>
+                    <td>{{ item.dinner }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="estimate">
+        <div class="estimate-heading">
+            <h4>GET YOUR ESTIMATED PLAN AMOUNT</h4>
+        </div>
+        <div class="get-estimate">
+            <div class="get-estimate-left">
+                <h5>Choose Your Meal Type</h5>
+                <div class="meal-types">
+                    <div class="form-check form-switch d-flex justify-content-between align-items-center mb-3">
+                        <label class="form-check-label fw-bold" for="breakfastSwitch">BREAKFAST</label>
+                        <input class="form-check-input" type="checkbox" role="switch" id="breakfastSwitch">
+                    </div>
+                    <div class="form-check form-switch d-flex justify-content-between align-items-center mb-3">
+                        <label class="form-check-label fw-bold" for="lunchSwitch">LUNCH</label>
+                        <input class="form-check-input" type="checkbox" role="switch" id="lunchSwitch">
+                    </div>
+                    <div class="form-check form-switch d-flex justify-content-between align-items-center mb-3">
+                        <label class="form-check-label fw-bold" for="dinnerSwitch">DINNER</label>
+                        <input class="form-check-input" type="checkbox" role="switch" id="dinnerSwitch">
+                    </div>
+                </div>
+            </div>
+            <div class="get-estimate-right">
+                <div class="estimate-dates">
+                    <div class="w-100">
+                        <label for="startDate" class="form-label fw-semibold mb-1">Start Date</label>
+                        <input type="date" id="startDate" class="form-control" />
+                    </div>
+                    <div class="w-100">
+                        <label for="endDate" class="form-label fw-semibold mb-1">End Date</label>
+                        <input type="date" id="endDate" class="form-control" />
+                    </div>
+                </div>
+                <div class="recurring-days">
+                    <h4>Recurring Date</h4>
+                    <div class="day-buttons">
+                        <button>Mon</button>
+                        <button>Tue</button>
+                        <button class="active">Wed</button>
+                        <button>Thu</button>
+                        <button>Fri</button>
+                        <button>Sat</button>
+                        <button>Sun</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="estimate-amount">
+            Pay: Rs 4999/-
+        </div>
+    </div>
+
+</div>

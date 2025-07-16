@@ -1,0 +1,220 @@
+.container-fluid {
+    padding: 2rem;
+}
+
+.menu-heading {
+    color: #C1282D;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+}
+
+.custom-table {
+    border-collapse: collapse;
+}
+
+.custom-table th {
+    background-color: #C1282D !important;
+    color: white;
+    border: none;
+    height: 80px;
+    vertical-align: middle;
+}
+
+.custom-table td {
+    border: none;
+    vertical-align: middle;
+    height: 80px;
+}
+
+.custom-table th:first-child {
+    border-top-left-radius: 12px;
+}
+
+.custom-table th:last-child {
+    border-top-right-radius: 12px;
+}
+
+.day-cell {
+    color: #C1282D;
+    font-weight: bold;
+}
+
+.alt-row {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.estimate {
+    background-color: #fff;
+    border-radius: 1.5rem 1.5rem 0 0;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 4rem;
+}
+
+.estimate-heading h4 {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.get-estimate {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.get-estimate-left,
+.get-estimate-right {
+    flex: 1 1 45%;
+}
+
+.get-estimate-left h5,
+.get-estimate-right h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.meal-types>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.meal-types h4 {
+    margin: 0;
+    font-weight: 700;
+}
+
+.form-check-input {
+    transform: scale(1.5);
+    margin-left: 1rem;
+}
+
+.form-check-input:checked {
+    background-color: #C1282D;
+    border-color: #C1282D;
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(193, 40, 45, 0.25);
+}
+
+.estimate-dates {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.estimate-dates label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.estimate-dates input {
+    width: 100%;
+}
+
+.recurring-days h4 {
+    margin-bottom: 1rem;
+}
+
+.recurring-days {
+    display: flex;
+    flex-direction: column;
+}
+
+.recurring-days .day-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.day-buttons button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background: #f8f9fa;
+    cursor: pointer;
+}
+
+.day-buttons button.active {
+    border: 1px solid #C1282D;
+    background-color: white;
+    color: #C1282D;
+    font-weight: bold;
+}
+
+.estimate-amount {
+    background-color: #C1282D;
+    color: white;
+    padding: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: right;
+    border-radius: 0 0 1rem 1rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .estimate {
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .get-estimate {
+        flex-direction: column;
+    }
+
+    .get-estimate-left,
+    .get-estimate-right {
+        flex: 1 1 100%;
+    }
+
+    .estimate-dates {
+        flex-direction: column;
+    }
+
+    .estimate-dates input {
+        width: 100%;
+    }
+
+    .day-buttons {
+        justify-content: space-between;
+    }
+
+    .day-buttons button {
+        flex: 1 1 30%;
+        text-align: center;
+    }
+
+    .estimate-amount {
+        text-align: center;
+        font-size: 1.1rem;
+    }
+
+    .meal-types>div {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .form-check-label {
+        font-size: 1rem;
+    }
+
+    .form-check-input {
+        margin-left: auto;
+    }
+}
