@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { NgbCalendar, NgbDate, NgbDatepickerModule, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -65,6 +65,7 @@ export class MenuComponent {
   minDate: NgbDateStruct;
   today: NgbDateStruct;
   estimateForm: FormGroup;
+  submitted = false;
 
   constructor(
     private calendar: NgbCalendar,
@@ -77,8 +78,8 @@ export class MenuComponent {
       breakfast: [false],
       lunch: [false],
       dinner: [false],
-      startDate: [''],
-      endDate: [''],
+      startDate: [null, Validators.required],
+      endDate: [null, Validators.required],
       recurringDays: this.fb.group({
         Mon: [false],
         Tue: [false],
@@ -88,7 +89,29 @@ export class MenuComponent {
         Sat: [false],
         Sun: [false],
       })
-    });
+    }, { validators: [this.mealTypeValidator, this.recurringDaysValidator] });
+  }
+
+  mealTypeValidator(control: AbstractControl): ValidationErrors | null {
+    const breakfast = control.get('breakfast')?.value;
+    const lunch = control.get('lunch')?.value;
+    const dinner = control.get('dinner')?.value;
+
+    if (!breakfast && !lunch && !dinner) {
+      return { noMealSelected: true };
+    }
+    return null;
+  }
+
+  recurringDaysValidator(control: AbstractControl): ValidationErrors | null {
+    const days = control.get('recurringDays');
+    if (!days) return null;
+
+    const anySelected = Object.values(days.value).some(val => val);
+    if (!anySelected) {
+      return { noRecurringDay: true };
+    }
+    return null;
   }
 
   isDateDisabled = (date: NgbDate, current?: { year: number; month: number }): boolean => {
@@ -97,7 +120,25 @@ export class MenuComponent {
     return checkDate <= todayDate;
   };
 
+  isEndDateDisabled = (date: NgbDate): boolean => {
+    const start = this.estimateForm.get('startDate')?.value;
+    if (!start) return true;
+
+    const startDate = new Date(start.year, start.month - 1, start.day);
+    const minEndDate = new Date(startDate);
+    minEndDate.setDate(minEndDate.getDate() + 7);
+
+    const currentDate = new Date(date.year, date.month - 1, date.day);
+
+    return currentDate < minEndDate;
+  };
+
   onSubmit() {
+    this.submitted = true;
+    if (this.estimateForm.invalid) {
+      this.estimateForm.markAllAsTouched();
+      return;
+    }
     console.log(this.estimateForm.value);
   }
 }

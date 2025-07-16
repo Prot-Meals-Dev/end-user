@@ -48,6 +48,9 @@
                             <input class="form-check-input" type="checkbox" id="dinnerSwitch" formControlName="dinner">
                         </div>
                     </div>
+                    <div *ngIf="submitted && estimateForm.errors?.['noMealSelected']" class="text-danger">
+                        Please select at least one meal type.
+                    </div>
                 </div>
 
                 <div class="get-estimate-right">
@@ -57,12 +60,20 @@
                             <input class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate"
                                 ngbDatepicker [minDate]="minDate" [markDisabled]="isDateDisabled"
                                 #startDp="ngbDatepicker" (click)="startDp.toggle()" readonly>
+                            <div *ngIf="estimateForm.get('startDate')?.touched && estimateForm.get('startDate')?.invalid"
+                                class="text-danger">
+                                Start date is required.
+                            </div>
                         </div>
                         <div class="w-100">
                             <label for="endDate" class="form-label fw-semibold mb-1">End Date</label>
                             <input class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate" ngbDatepicker
-                                [markDisabled]="isDateDisabled" #endDp="ngbDatepicker" (click)="endDp.toggle()"
+                                [markDisabled]="isEndDateDisabled" #endDp="ngbDatepicker" (click)="endDp.toggle()"
                                 readonly>
+                            <div *ngIf="estimateForm.get('endDate')?.touched && estimateForm.get('endDate')?.invalid"
+                                class="text-danger">
+                                End date is required.
+                            </div>
                         </div>
                     </div>
 
@@ -83,6 +94,9 @@
                                 (click)="estimateForm.get('recurringDays.Sat')?.setValue(!estimateForm.get('recurringDays.Sat')?.value)">Sat</button>
                             <button type="button" [class.active]="estimateForm.get('recurringDays.Sun')?.value"
                                 (click)="estimateForm.get('recurringDays.Sun')?.setValue(!estimateForm.get('recurringDays.Sun')?.value)">Sun</button>
+                        </div>
+                        <div *ngIf="submitted && estimateForm.errors?.['noRecurringDay']" class="text-danger">
+                            Please select at least one recurring day.
                         </div>
                     </div>
                 </div>
