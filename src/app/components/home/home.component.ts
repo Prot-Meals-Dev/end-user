@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from "../../shared/components/header/header.component";
 import { FooterComponent } from "../../shared/components/footer/footer.component";
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -58,7 +59,15 @@ export class HomeComponent {
     },
   ]
 
+  constructor(
+    private router: Router
+  ) { }
+
   createStars(count: number): number[] {
     return Array(count).fill(0);
+  }
+
+  goToMenu() {
+    this.router.navigate(['/menu']);
   }
 }
