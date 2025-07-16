@@ -25,58 +25,77 @@
     </div>
 
     <div class="estimate">
-        <div class="estimate-heading">
-            <h4>GET YOUR ESTIMATED PLAN AMOUNT</h4>
-        </div>
-        <div class="get-estimate">
-            <div class="get-estimate-left">
-                <h5>Choose Your Meal Type</h5>
-                <div class="meal-types">
-                    <div class="form-check form-switch d-flex justify-content-between align-items-center mb-3">
-                        <label class="form-check-label fw-bold" for="breakfastSwitch">BREAKFAST</label>
-                        <input class="form-check-input" type="checkbox" role="switch" id="breakfastSwitch">
+        <form [formGroup]="estimateForm" (ngSubmit)="onSubmit()">
+            <div class="estimate-heading">
+                <h4>GET YOUR ESTIMATED PLAN AMOUNT</h4>
+            </div>
+
+            <div class="get-estimate">
+                <div class="get-estimate-left">
+                    <h5>Choose Your Meal Type</h5>
+                    <div class="meal-types">
+                        <div class="form-check form-switch d-flex justify-content-between align-items-center mb-3">
+                            <label class="form-check-label fw-bold" for="breakfastSwitch">BREAKFAST</label>
+                            <input class="form-check-input" type="checkbox" id="breakfastSwitch"
+                                formControlName="breakfast">
+                        </div>
+                        <div class="form-check form-switch d-flex justify-content-between align-items-center mb-3">
+                            <label class="form-check-label fw-bold" for="lunchSwitch">LUNCH</label>
+                            <input class="form-check-input" type="checkbox" id="lunchSwitch" formControlName="lunch">
+                        </div>
+                        <div class="form-check form-switch d-flex justify-content-between align-items-center mb-3">
+                            <label class="form-check-label fw-bold" for="dinnerSwitch">DINNER</label>
+                            <input class="form-check-input" type="checkbox" id="dinnerSwitch" formControlName="dinner">
+                        </div>
                     </div>
-                    <div class="form-check form-switch d-flex justify-content-between align-items-center mb-3">
-                        <label class="form-check-label fw-bold" for="lunchSwitch">LUNCH</label>
-                        <input class="form-check-input" type="checkbox" role="switch" id="lunchSwitch">
+                </div>
+
+                <div class="get-estimate-right">
+                    <div class="estimate-dates">
+                        <div class="w-100">
+                            <label for="startDate" class="form-label fw-semibold mb-1">Start Date</label>
+                            <input class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate"
+                                ngbDatepicker [minDate]="minDate" [markDisabled]="isDateDisabled"
+                                #startDp="ngbDatepicker" (click)="startDp.toggle()" readonly>
+                        </div>
+                        <div class="w-100">
+                            <label for="endDate" class="form-label fw-semibold mb-1">End Date</label>
+                            <input class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate" ngbDatepicker
+                                [markDisabled]="isDateDisabled" #endDp="ngbDatepicker" (click)="endDp.toggle()"
+                                readonly>
+                        </div>
                     </div>
-                    <div class="form-check form-switch d-flex justify-content-between align-items-center mb-3">
-                        <label class="form-check-label fw-bold" for="dinnerSwitch">DINNER</label>
-                        <input class="form-check-input" type="checkbox" role="switch" id="dinnerSwitch">
+
+                    <div class="recurring-days">
+                        <h4>Recurring Date</h4>
+                        <div class="day-buttons" formGroupName="recurringDays">
+                            <button type="button" [class.active]="estimateForm.get('recurringDays.Mon')?.value"
+                                (click)="estimateForm.get('recurringDays.Mon')?.setValue(!estimateForm.get('recurringDays.Mon')?.value)">Mon</button>
+                            <button type="button" [class.active]="estimateForm.get('recurringDays.Tue')?.value"
+                                (click)="estimateForm.get('recurringDays.Tue')?.setValue(!estimateForm.get('recurringDays.Tue')?.value)">Tue</button>
+                            <button type="button" [class.active]="estimateForm.get('recurringDays.Wed')?.value"
+                                (click)="estimateForm.get('recurringDays.Wed')?.setValue(!estimateForm.get('recurringDays.Wed')?.value)">Wed</button>
+                            <button type="button" [class.active]="estimateForm.get('recurringDays.Thu')?.value"
+                                (click)="estimateForm.get('recurringDays.Thu')?.setValue(!estimateForm.get('recurringDays.Thu')?.value)">Thu</button>
+                            <button type="button" [class.active]="estimateForm.get('recurringDays.Fri')?.value"
+                                (click)="estimateForm.get('recurringDays.Fri')?.setValue(!estimateForm.get('recurringDays.Fri')?.value)">Fri</button>
+                            <button type="button" [class.active]="estimateForm.get('recurringDays.Sat')?.value"
+                                (click)="estimateForm.get('recurringDays.Sat')?.setValue(!estimateForm.get('recurringDays.Sat')?.value)">Sat</button>
+                            <button type="button" [class.active]="estimateForm.get('recurringDays.Sun')?.value"
+                                (click)="estimateForm.get('recurringDays.Sun')?.setValue(!estimateForm.get('recurringDays.Sun')?.value)">Sun</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="get-estimate-right">
-                <div class="estimate-dates">
-                    <div class="w-100">
-                        <label for="startDate" class="form-label fw-semibold mb-1">Start Date</label>
-                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate" ngbDatepicker
-                            [minDate]="minDate" [markDisabled]="isDateDisabled" #startDp="ngbDatepicker"
-                            (click)="startDp.toggle()" readonly>
-                    </div>
-                    <div class="w-100">
-                        <label for="endDate" class="form-label fw-semibold mb-1">End Date</label>
-                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate" ngbDatepicker
-                            [markDisabled]="isDateDisabled" #endDp="ngbDatepicker" (click)="endDp.toggle()" readonly>
-                    </div>
-                </div>
-                <div class="recurring-days">
-                    <h4>Recurring Date</h4>
-                    <div class="day-buttons">
-                        <button>Mon</button>
-                        <button>Tue</button>
-                        <button class="active">Wed</button>
-                        <button>Thu</button>
-                        <button>Fri</button>
-                        <button>Sat</button>
-                        <button>Sun</button>
-                    </div>
-                </div>
+
+            <div class="estimate-amount">
+                Pay: Rs 4999/-
             </div>
-        </div>
-        <div class="estimate-amount">
-            Pay: Rs 4999/-
-        </div>
+
+            <div class="text-center mt-3">
+                <button class="btn btn-danger px-4" type="submit">Get Estimate</button>
+            </div>
+        </form>
     </div>
 
 </div>

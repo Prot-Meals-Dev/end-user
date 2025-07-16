@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgbCalendar, NgbDate, NgbDatepickerModule, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-menu',
-  imports: [CommonModule, NgbDatepickerModule],
+  imports: [CommonModule, NgbDatepickerModule, ReactiveFormsModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
@@ -63,12 +64,31 @@ export class MenuComponent {
 
   minDate: NgbDateStruct;
   today: NgbDateStruct;
+  estimateForm: FormGroup;
 
   constructor(
     private calendar: NgbCalendar,
+    private fb: FormBuilder
   ) {
     this.today = this.calendar.getToday();
     this.minDate = this.today;
+
+    this.estimateForm = this.fb.group({
+      breakfast: [false],
+      lunch: [false],
+      dinner: [false],
+      startDate: [''],
+      endDate: [''],
+      recurringDays: this.fb.group({
+        Mon: [false],
+        Tue: [false],
+        Wed: [false],
+        Thu: [false],
+        Fri: [false],
+        Sat: [false],
+        Sun: [false],
+      })
+    });
   }
 
   isDateDisabled = (date: NgbDate, current?: { year: number; month: number }): boolean => {
@@ -76,4 +96,8 @@ export class MenuComponent {
     const checkDate = new Date(date.year, date.month - 1, date.day);
     return checkDate <= todayDate;
   };
+
+  onSubmit() {
+    console.log(this.estimateForm.value);
+  }
 }
