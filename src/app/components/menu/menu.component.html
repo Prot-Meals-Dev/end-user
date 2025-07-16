@@ -50,11 +50,14 @@
                 <div class="estimate-dates">
                     <div class="w-100">
                         <label for="startDate" class="form-label fw-semibold mb-1">Start Date</label>
-                        <input type="date" id="startDate" class="form-control" />
+                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate" ngbDatepicker
+                            [minDate]="minDate" [markDisabled]="isDateDisabled" #startDp="ngbDatepicker"
+                            (click)="startDp.toggle()" readonly>
                     </div>
                     <div class="w-100">
                         <label for="endDate" class="form-label fw-semibold mb-1">End Date</label>
-                        <input type="date" id="endDate" class="form-control" />
+                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate" ngbDatepicker
+                            [markDisabled]="isDateDisabled" #endDp="ngbDatepicker" (click)="endDp.toggle()" readonly>
                     </div>
                 </div>
                 <div class="recurring-days">
