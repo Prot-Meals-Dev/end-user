@@ -11,7 +11,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Mobile only login -->
-            <button class="btn btn-danger d-lg-none">Login</button>
+            <button class="btn btn-danger d-lg-none" (click)="openLogin()">Login</button>
         </div>
 
         <div class="collapse navbar-collapse" id="navbarContent">
@@ -29,7 +29,7 @@
                 </ul>
 
                 <!-- Desktop only login -->
-                <button class="btn btn-danger d-none d-lg-block">Login</button>
+                <button class="btn btn-danger d-none d-lg-block" (click)="openLogin()">Login</button>
             </div>
         </div>
     </div>
