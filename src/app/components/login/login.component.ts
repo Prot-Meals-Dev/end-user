@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/interceptor/auth.service';
 import { AlertService } from '../../shared/components/alert/service/alert.service';
@@ -13,6 +13,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class LoginComponent implements OnInit {
   isLogin = true;
+  @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
 
   otpForm: FormGroup;
   signupForm: FormGroup;
@@ -102,17 +103,28 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.otpForm.valid) {
-      const { email, otp } = this.otpForm.value;
-      const otpValue = otp.join('');
+      const rawValue = this.otpForm.getRawValue();
+      const email = rawValue.email;
+      const otpValue = rawValue.otp.join('');
 
       this.authService.verifyOtp(email, otpValue).subscribe({
         next: res => {
-          console.log('Login success:', res);
-          // Navigate or update UI here
+          this.alertService.showAlert({
+            message: 'Log In Success',
+            type: 'success',
+            autoDismiss: true,
+            duration: 4000
+          });
+          this.activeModal.close(res.data)
         },
         error: err => {
           console.error('OTP verification failed', err);
-          // optionally show a toast here
+          this.alertService.showAlert({
+            message: err.error.message || 'Log in failed',
+            type: 'error',
+            autoDismiss: true,
+            duration: 4000
+          });
         }
       });
     }
@@ -134,5 +146,25 @@ export class LoginComponent implements OnInit {
 
   closePopup() {
     this.activeModal.close();
+  }
+
+  onOtpInput(event: Event, index: number): void {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+
+    if (value && index < this.otpArray.length - 1) {
+      const nextInput = this.otpInputs.toArray()[index + 1];
+      nextInput.nativeElement.focus();
+    }
+  }
+
+  onOtpKeydown(event: KeyboardEvent, index: number): void {
+    const input = event.target as HTMLInputElement;
+
+    if (event.key === 'Backspace' && !input.value && index > 0) {
+      const prevInput = this.otpInputs.toArray()[index - 1];
+      prevInput.nativeElement.focus();
+      this.otpArray.at(index - 1).setValue('');
+    }
   }
 }

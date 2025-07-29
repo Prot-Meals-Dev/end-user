@@ -11,7 +11,24 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Mobile only login -->
-            <button class="btn btn-danger d-lg-none" (click)="openLogin()">Login</button>
+            <div *ngIf="isLoggedIn; else loginBtnMobile" class="dropdown d-lg-none">
+                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="bi bi-person-circle"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">My Profile</a></li>
+                    <li><a class="dropdown-item" href="#">My Orders</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item text-danger" href="#" (click)="logout()">Log out</a></li>
+                </ul>
+            </div>
+
+            <ng-template #loginBtnMobile>
+                <button class="btn btn-danger d-lg-none" (click)="openLogin()">Login</button>
+            </ng-template>
         </div>
 
         <div class="collapse navbar-collapse" id="navbarContent">
@@ -29,7 +46,24 @@
                 </ul>
 
                 <!-- Desktop only login -->
-                <button class="btn btn-danger d-none d-lg-block" (click)="openLogin()">Login</button>
+                <div *ngIf="isLoggedIn; else loginButton" class="dropdown d-none d-lg-block">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-person-circle"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">My Profile</a></li>
+                        <li><a class="dropdown-item" href="#">My Orders</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" href="#" (click)="logout()">Log out</a></li>
+                    </ul>
+                </div>
+
+                <ng-template #loginButton>
+                    <button class="btn btn-danger d-none d-lg-block" (click)="openLogin()">Login</button>
+                </ng-template>
             </div>
         </div>
     </div>
