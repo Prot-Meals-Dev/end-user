@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Va
 import { AuthService } from '../../core/interceptor/auth.service';
 import { AlertService } from '../../shared/components/alert/service/alert.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-login',
@@ -22,12 +23,14 @@ export class LoginComponent implements OnInit {
   counter = 90;
   countdownDisplay = '1:30';
   intervalId: any;
+  allRegions: any[] = [];
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private alertService: AlertService,
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal,
+    private service: LoginService
   ) {
     this.otpForm = this.fb.group({
       email: this.fb.control(
@@ -47,7 +50,20 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.loadRegions()
+  }
+
+  loadRegions() {
+    this.service.getRegions().subscribe({
+      next: (res: any) => {
+        this.allRegions = res.data;
+      },
+      error: (err: any) => {
+        console.error(err);
+      }
+    })
+  }
 
   get otpArray(): FormArray<FormControl<string>> {
     return this.otpForm.get('otp') as FormArray<FormControl<string>>;
@@ -83,10 +99,9 @@ export class LoginComponent implements OnInit {
         }, 1000);
       },
       error: err => {
-        console.error('OTP generation failed', err);
         this.otpForm.get('email')?.enable();
         this.alertService.showAlert({
-          message: err.error.message || 'Update failed',
+          message: err.error.message || 'OTP generation failed',
           type: 'error',
           autoDismiss: true,
           duration: 4000
@@ -118,7 +133,6 @@ export class LoginComponent implements OnInit {
           this.activeModal.close(res.data)
         },
         error: err => {
-          console.error('OTP verification failed', err);
           this.alertService.showAlert({
             message: err.error.message || 'Log in failed',
             type: 'error',
@@ -132,7 +146,37 @@ export class LoginComponent implements OnInit {
 
   onSignupSubmit() {
     if (this.signupForm.valid) {
-      console.log('Sign Up Data:', this.signupForm.value);
+      const formData = this.signupForm.value;
+
+      const payload = {
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        phone: `+91${formData.phone}`,
+        region_id: formData.region,
+        address: formData.address
+      };
+
+      this.service.signUp(payload).subscribe({
+        next: (res: any) => {
+          this.alertService.showAlert({
+            message: 'Sign up successful!',
+            type: 'success',
+            autoDismiss: true,
+            duration: 4000
+          });
+          this.activeModal.close(res);
+        },
+        error: (err: any) => {
+          this.alertService.showAlert({
+            message: err.error.message || 'Sign up failed',
+            type: 'error',
+            autoDismiss: true,
+            duration: 4000
+          });
+        }
+      });
+    } else {
+      this.signupForm.markAllAsTouched();
     }
   }
 

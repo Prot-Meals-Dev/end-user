@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { NgbCalendar, NgbDate, NgbDatepickerModule, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MenuService } from './service/menu.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +10,7 @@ import { NgbCalendar, NgbDate, NgbDatepickerModule, NgbDateStruct, NgbModal } fr
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit {
   menu = [
     {
       id: 1,
@@ -69,7 +70,8 @@ export class MenuComponent {
 
   constructor(
     private calendar: NgbCalendar,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private service: MenuService
   ) {
     this.today = this.calendar.getToday();
     this.minDate = this.today;
@@ -90,6 +92,14 @@ export class MenuComponent {
         Sun: [false],
       })
     }, { validators: [this.mealTypeValidator, this.recurringDaysValidator] });
+  }
+
+  ngOnInit(): void {
+    this.service.getMenu().subscribe({
+      next: (res: any) => {
+        console.log(res);
+      }
+    })
   }
 
   mealTypeValidator(control: AbstractControl): ValidationErrors | null {

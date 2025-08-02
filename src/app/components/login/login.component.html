@@ -43,7 +43,11 @@
         <input formControlName="lastName" type="text" placeholder="Last Name" />
         <input formControlName="phone" type="text" placeholder="Phone Number" />
         <input formControlName="email" type="email" placeholder="Email Address" />
-        <input formControlName="region" type="text" placeholder="Region" />
+        <select formControlName="region">
+            <option value="" disabled selected>Select Region</option>
+            <option *ngFor="let region of allRegions" [value]="region.id">{{ region.name }} ({{ region.city }}, {{
+                region.state }})</option>
+        </select>
         <textarea formControlName="address" placeholder="Address"></textarea>
 
         <button type="submit" class="send-otp-btn">Sign Up</button>
