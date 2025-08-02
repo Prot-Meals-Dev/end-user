@@ -40,7 +40,6 @@ export class HeaderComponent implements OnInit {
     const modalRef = this.modalService.open(LoginComponent, { centered: true, backdrop: 'static' });
     modalRef.result.then(
       (result) => {
-        console.log('Login success response:', result);
         this.checkLoginStatus();
       },
       (reason) => {

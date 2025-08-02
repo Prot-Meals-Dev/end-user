@@ -9,6 +9,19 @@
     margin-bottom: 3rem;
 }
 
+.drop-down select {
+    border: 2px solid #C1282D;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    color: #C1282D;
+}
+
+.drop-down select:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(193, 40, 45, 0.25);
+}
+
 .custom-table {
     border-collapse: collapse;
 }

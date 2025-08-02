@@ -8,12 +8,21 @@ import { HttpClient } from '@angular/common/http';
 export class MenuService {
 
   private BaseUrl = `${environment.apiUrl}/weekly-menu`
+  private RegionUrl = `${environment.apiUrl}/regions`
 
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
-  getMenu(){
+  getMenu() {
     return this.http.get(`${this.BaseUrl}/customer/my-region`)
+  }
+
+  getRegions() {
+    return this.http.get(`${this.RegionUrl}`)
+  }
+
+  getRegionMenu(id:string){
+    return this.http.get(`${this.BaseUrl}/by-region/${id}`)
   }
 }

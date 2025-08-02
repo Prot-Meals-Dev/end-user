@@ -3,7 +3,16 @@
         <h3 class="menu-heading">PROTMEALS MENU</h3>
     </div>
 
-    <div class="table-responsive">
+    <div class="drop-down mb-4 text-center">
+        <select class="form-select w-auto d-inline-block" #regionSelect (change)="fetchRegionMenu(regionSelect.value)">
+            <option value="" disabled selected>Select Region</option>
+            <option *ngFor="let region of allRegions" [value]="region.id">
+                {{ region.name }} ({{ region.city }}, {{ region.state }})
+            </option>
+        </select>
+    </div>
+
+    <div class="table-responsive" *ngIf="menu.length; else noRegion">
         <table class="table custom-table text-center align-middle table-hover table-striped">
             <thead>
                 <tr>
@@ -23,6 +32,12 @@
             </tbody>
         </table>
     </div>
+
+    <ng-template #noRegion>
+        <div class="text-center text-muted my-4">
+            <h5>Please select a region to view the menu.</h5>
+        </div>
+    </ng-template>
 
     <div class="estimate">
         <form [formGroup]="estimateForm" (ngSubmit)="onSubmit()">

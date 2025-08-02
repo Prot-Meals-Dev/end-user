@@ -1,77 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { NgbCalendar, NgbDate, NgbDatepickerModule, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MenuService } from './service/menu.service';
 
 @Component({
   selector: 'app-menu',
-  imports: [CommonModule, NgbDatepickerModule, ReactiveFormsModule],
+  imports: [CommonModule, NgbDatepickerModule, ReactiveFormsModule, FormsModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
 export class MenuComponent implements OnInit {
-  menu = [
-    {
-      id: 1,
-      day: 'Monday',
-      breakfast: 'Appam, Kuruma',
-      lunch: 'Rice, Aviyal, Achar, Fish Curry, Fish Fry, Thoran, Pullisheri, Rasam',
-      dinner: 'Chapati,Soya Chunks'
-    },
-    {
-      id: 2,
-      day: 'Tuesday',
-      breakfast: 'Idli,Sambar',
-      lunch: 'Rice, Thoran, Sambar, Rasam, Kichedi,Kootu Curry,Omlet',
-      dinner: 'Porotta, Chicken Curry'
-    },
-    {
-      id: 3,
-      day: 'Wednesday',
-      breakfast: 'Puttu, Pazham, Payar, Pappadam',
-      lunch: 'Vegetable, Biriyani, Achar, Salad',
-      dinner: 'Appam, Mutta Curry'
-    },
-    {
-      id: 4,
-      day: 'Thursday',
-      breakfast: 'Dosa, Sambar',
-      lunch: 'Rice, Aviyal, Achar, Fish Curry, Thoran, Sambar, Rasam',
-      dinner: 'Chapathi, Mutta Curry'
-    },
-    {
-      id: 5,
-      day: 'Friday',
-      breakfast: 'Uppumavu, Pazham, Kuruma',
-      lunch: 'Egg fried rice, Achar, Salad',
-      dinner: 'Dosa, Kadala Curry'
-    },
-    {
-      id: 6,
-      day: 'Saturday',
-      breakfast: 'Idiyappam, Kuruma',
-      lunch: 'Rice,achar, Mezhukkuperatti, Aviyal, Fish Fry, Pulisheri, Fish Curry',
-      dinner: 'Chapati, Kuruma'
-    },
-    {
-      id: 7,
-      day: 'Sunday',
-      breakfast: 'Dosa, Kadala curry',
-      lunch: 'Biriyani, Achar, Salad',
-      dinner: 'Puttu, Kadala Curry'
-    },
-  ]
+  menu: any = []
 
   minDate: NgbDateStruct;
   today: NgbDateStruct;
   estimateForm: FormGroup;
   submitted = false;
 
+  allRegions!: any[];
+  selectedRegionId!: string;
+
   constructor(
     private calendar: NgbCalendar,
     private fb: FormBuilder,
-    private service: MenuService
+    private service: MenuService,
   ) {
     this.today = this.calendar.getToday();
     this.minDate = this.today;
@@ -100,6 +53,33 @@ export class MenuComponent implements OnInit {
         console.log(res);
       }
     })
+
+    this.loadRegions()
+  }
+
+  loadRegions() {
+    this.service.getRegions().subscribe({
+      next: (res: any) => {
+        this.allRegions = res.data;
+        console.log(res);
+
+      },
+      error: (err: any) => {
+        console.error(err);
+      }
+    })
+  }
+
+  fetchRegionMenu(id: string) {
+    this.service.getRegionMenu(id).subscribe({
+      next: (res: any) => {
+        this.menu = res.data || [];
+      },
+      error: (err: any) => {
+        console.error(err);
+        this.menu = [];
+      }
+    });
   }
 
   mealTypeValidator(control: AbstractControl): ValidationErrors | null {
