@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../../../components/login/login.component';
 import { AuthService } from '../../../core/interceptor/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +48,12 @@ export class HeaderComponent implements OnInit {
         console.log('Modal dismissed:', reason);
       }
     );
+  }
+
+  goTo(link: string) {
+    console.log(link);
+    
+    this.router.navigate([link]);
   }
 
 }

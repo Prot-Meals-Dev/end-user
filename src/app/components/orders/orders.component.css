@@ -1,0 +1,78 @@
+.custom-btn {
+    border: 1px solid #C0272D;
+    color: #C0272D;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.filter-group {
+    background-color: #f8f9fa;
+}
+
+.filter-item {
+    display: flex;
+    align-items: center;
+}
+
+.custom-btn:hover {
+    background-color: #C0272D;
+    color: white;
+}
+
+.action-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+}
+
+.edit-icon {
+    color: #C0272D;
+    transition: color 0.3s;
+}
+
+.edit-icon:hover {
+    color: #a61e22;
+}
+
+.pause-icon {
+    color: #ffc107;
+    transition: color 0.3s;
+}
+
+.pause-icon:hover {
+    color: #e0a800;
+}
+
+.custom-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.custom-table th,
+.custom-table td {
+    border-bottom: 1px solid #dee2e6;
+    padding: 0.75rem;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.custom-table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+.custom-pagination ::ng-deep .pagination .page-item.active .page-link {
+    background-color: #C0272D;
+    border-color: #C0272D;
+    color: white;
+}
+
+.custom-pagination ::ng-deep .pagination .page-item .page-link {
+    color: #C0272D;
+}
