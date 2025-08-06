@@ -164,7 +164,15 @@ export class LoginComponent implements OnInit {
             autoDismiss: true,
             duration: 4000
           });
-          this.activeModal.close(res);
+          this.isLogin = true;
+          this.isOtpSent = false;
+          clearInterval(this.intervalId);
+          this.countdownDisplay = '1:30';
+
+          const email = this.signupForm.get('email')?.value;
+          this.otpForm.reset();
+          this.otpForm.get('email')?.setValue(email);
+          this.otpForm.get('email')?.enable();
         },
         error: (err: any) => {
           this.alertService.showAlert({
