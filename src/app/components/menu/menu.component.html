@@ -72,7 +72,7 @@
                     <div class="estimate-dates">
                         <div class="w-100">
                             <label for="startDate" class="form-label fw-semibold mb-1">Start Date</label>
-                            <input class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate"
+                            <input class="form-control" placeholder="dd-mm-yyyy" formControlName="startDate"
                                 ngbDatepicker [minDate]="minDate" [markDisabled]="isDateDisabled"
                                 #startDp="ngbDatepicker" (click)="startDp.toggle()" readonly>
                             <div *ngIf="estimateForm.get('startDate')?.touched && estimateForm.get('startDate')?.invalid"
@@ -82,7 +82,7 @@
                         </div>
                         <div class="w-100">
                             <label for="endDate" class="form-label fw-semibold mb-1">End Date</label>
-                            <input class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate" ngbDatepicker
+                            <input class="form-control" placeholder="dd-mm-yyyy" formControlName="endDate" ngbDatepicker
                                 [markDisabled]="isEndDateDisabled" #endDp="ngbDatepicker" (click)="endDp.toggle()"
                                 readonly>
                             <div *ngIf="estimateForm.get('endDate')?.touched && estimateForm.get('endDate')?.invalid"
@@ -118,11 +118,11 @@
             </div>
 
             <div class="estimate-amount">
-                Pay: Rs 4999/-
+                <h5 class="fw-semibold">Pay: Rs {{ totalAmount }}/-</h5>
             </div>
 
             <div class="text-center mt-3">
-                <button class="btn btn-danger px-4" type="submit">Get Estimate</button>
+                <button class="btn btn-danger px-4" type="submit">Place Order</button>
             </div>
         </form>
     </div>

@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { NgbCalendar, NgbDate, NgbDatepickerModule, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MenuService } from './service/menu.service';
+import { Router } from '@angular/router';
+import { LoginComponent } from '../login/login.component';
+import { AuthService } from '../../core/interceptor/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,11 +23,18 @@ export class MenuComponent implements OnInit {
 
   allRegions!: any[];
   selectedRegionId!: string;
+  currentMealType!: any;
+  totalAmount = 0;
+  isLoggedIn = false;
+  user: any = null;
 
   constructor(
     private calendar: NgbCalendar,
     private fb: FormBuilder,
     private service: MenuService,
+    private router: Router,
+    private modalService: NgbModal,
+    private authService: AuthService
   ) {
     this.today = this.calendar.getToday();
     this.minDate = this.today;
@@ -48,21 +58,29 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getMenu().subscribe({
-      next: (res: any) => {
-        console.log(res);
-      }
-    })
-
     this.loadRegions()
+    this.loadMealTypes()
+
+    this.estimateForm.valueChanges.subscribe(() => {
+      this.calculateEstimateAmount();
+    });
   }
 
   loadRegions() {
     this.service.getRegions().subscribe({
       next: (res: any) => {
         this.allRegions = res.data;
-        console.log(res);
+      },
+      error: (err: any) => {
+        console.error(err);
+      }
+    })
+  }
 
+  loadMealTypes() {
+    this.service.getMealTypes().subscribe({
+      next: (res: any) => {
+        this.currentMealType = res.data;
       },
       error: (err: any) => {
         console.error(err);
@@ -125,10 +143,84 @@ export class MenuComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+
     if (this.estimateForm.invalid) {
       this.estimateForm.markAllAsTouched();
       return;
     }
-    console.log(this.estimateForm.value);
+
+    if (!this.authService.isLoggedIn()) {
+      const buttonElement = document.activeElement as HTMLElement;
+      buttonElement?.blur();
+
+      const modalRef = this.modalService.open(LoginComponent, { centered: true, backdrop: 'static' });
+      modalRef.result.then(
+        () => {
+          this.checkLoginStatus();
+
+          if (this.isLoggedIn) {
+            this.router.navigate(['/summary'], {
+              state: {
+                formData: this.estimateForm.value,
+                totalAmount: this.totalAmount,
+                user: this.user
+              }
+            });
+          }
+        },
+        (reason) => {
+          console.log('Login canceled:', reason);
+        }
+      );
+    } else {
+      this.checkLoginStatus();
+
+      this.router.navigate(['/summary'], {
+        state: {
+          formData: this.estimateForm.value,
+          totalAmount: this.totalAmount,
+          user: this.user
+        }
+      });
+    }
   }
+
+  checkLoginStatus() {
+    this.isLoggedIn = this.authService.isLoggedIn();
+    this.user = this.isLoggedIn ? this.authService.getUser() : null;
+  }
+
+  calculateEstimateAmount(): void {
+    const form = this.estimateForm.value;
+
+    if (!this.currentMealType || !form.startDate || !form.endDate) {
+      this.totalAmount = 0;
+      return;
+    }
+
+    const startDate = new Date(form.startDate.year, form.startDate.month - 1, form.startDate.day);
+    const endDate = new Date(form.endDate.year, form.endDate.month - 1, form.endDate.day);
+
+    const diffInMs = endDate.getTime() - startDate.getTime();
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    const weeks = Math.floor(diffInDays / 7);
+
+    const recurringDays = form.recurringDays;
+    const daysSelected = Object.values(recurringDays).filter(Boolean).length;
+
+    let totalPerDay = 0;
+
+    if (form.breakfast) {
+      totalPerDay += parseFloat(this.currentMealType[0].breakfast_price || '0');
+    }
+    if (form.lunch) {
+      totalPerDay += parseFloat(this.currentMealType[0].lunch_price || '0');
+    }
+    if (form.dinner) {
+      totalPerDay += parseFloat(this.currentMealType[0].dinner_price || '0');
+    }
+
+    this.totalAmount = weeks * daysSelected * totalPerDay;
+  }
+
 }

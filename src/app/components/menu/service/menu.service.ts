@@ -9,6 +9,7 @@ export class MenuService {
 
   private BaseUrl = `${environment.apiUrl}/weekly-menu`
   private RegionUrl = `${environment.apiUrl}/regions`
+  private MealTypeUrl = `${environment.apiUrl}/meal-types`
 
   constructor(
     private http: HttpClient
@@ -24,5 +25,9 @@ export class MenuService {
 
   getRegionMenu(id:string){
     return this.http.get(`${this.BaseUrl}/by-region/${id}`)
+  }
+
+  getMealTypes(){
+    return this.http.get(`${this.MealTypeUrl}`)
   }
 }
