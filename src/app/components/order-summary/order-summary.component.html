@@ -1,13 +1,53 @@
-<div class="container-fluid">
-    <div class="summary">
-        <div class="headings">
-            <h3>Order Summary</h3>
+<div class="summary-container">
+    <!-- Order Summary Card -->
+    <div class="card-box">
+        <div class="card-header">Order Summary</div>
+
+        <div class="meal-types">{{ mealTypes.join(' $ ') }}</div>
+
+        <div class="info-line">
+            <span class="label">Start from:</span>
+            <span class="value">{{ formattedStartDate }}</span>
+        </div>
+        <div class="info-line">
+            <span class="label">End Date:</span>
+            <span class="value">{{ formattedEndDate }}</span>
+        </div>
+        <div class="info-line">
+            <span class="label">Days Choosen:</span>
+            <span class="value">{{ selectedDays.join(',') }}</span>
+        </div>
+
+        <div class="card-bottom">
+            <span class="payable-label">Payable Amount:</span>
+            <span class="payable-value">Rs {{ totalAmount }}</span>
         </div>
     </div>
 
-    <div class="details">
-        <div class="headings">
-            <h3>Delivery Details</h3>
+    <!-- Delivery Details Card -->
+    <div class="card-box">
+        <div class="card-header">Delivery Details</div>
+
+        <div class="info-line">
+            <span class="label">Name:</span>
+            <span class="value">{{ userDetails?.name }}</span>
+        </div>
+        <div class="info-line">
+            <span class="label">Contact Number:</span>
+            <span class="value">{{ userDetails?.phone }}</span>
+        </div>
+        <div class="info-line">
+            <span class="label">Address:</span>
+            <span class="value">{{ userDetails?.address }}</span>
+        </div>
+
+        <div class="card-bottom center">
+            <button class="change-btn" (click)="changeAddress()">Change Delivery Details</button>
         </div>
     </div>
+</div>
+
+<!-- Submit Button -->
+<div class="submit-container">
+    <button class="submit-btn" (click)="submitOrder()">Submit</button>
 </div>

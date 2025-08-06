@@ -1,0 +1,139 @@
+.summary-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.card-box {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 24px;
+    width: 420px;
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-header {
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+}
+
+.meal-types {
+    font-size: 20px;
+    color: #d10000;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.info-line {
+    margin-bottom: 12px;
+}
+
+.label {
+    color: #999;
+    font-size: 16px;
+}
+
+.value {
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 8px;
+    color: #000;
+}
+
+.card-bottom {
+    border-top: 2px solid #e0e0e0;
+    padding-top: 16px;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-bottom.center {
+    justify-content: center;
+}
+
+.payable-label {
+    font-weight: 600;
+    color: #000;
+    font-size: 17px;
+}
+
+.payable-value {
+    color: #d10000;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.submit-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.change-btn,
+.submit-btn {
+    background-color: #d10000;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.change-btn:hover,
+.submit-btn:hover {
+    background-color: #a80000;
+    transform: scale(1.03);
+}
+
+@media (max-width: 992px) {
+    .summary-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .card-box {
+        width: 90%;
+        min-width: unset;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-header {
+        font-size: 20px;
+    }
+
+    .meal-types {
+        font-size: 18px;
+    }
+
+    .label,
+    .value {
+        font-size: 15px;
+    }
+
+    .payable-label,
+    .payable-value {
+        font-size: 16px;
+    }
+
+    .change-btn,
+    .submit-btn {
+        font-size: 13px;
+        padding: 8px 20px;
+    }
+}
