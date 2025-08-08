@@ -131,13 +131,6 @@ export class OrderSummaryComponent implements OnInit {
 
     this.service.newOrder(payload).subscribe({
       next: (res) => {
-        this.alertService.showAlert({
-          message: 'Order submitted successfully!',
-          type: 'success',
-          autoDismiss: true,
-          duration: 4000
-        });
-
         this.orderSuccess = true;
         setTimeout(() => {
           this.showGoHomeBtn = true;
