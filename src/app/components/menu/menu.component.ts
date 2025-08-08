@@ -80,7 +80,7 @@ export class MenuComponent implements OnInit {
   loadMealTypes() {
     this.service.getMealTypes().subscribe({
       next: (res: any) => {
-        this.currentMealType = res.data;
+        this.currentMealType = res.data;        
       },
       error: (err: any) => {
         console.error(err);

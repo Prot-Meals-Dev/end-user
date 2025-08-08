@@ -45,7 +45,7 @@
         </div>
 
         <div class="card-bottom center">
-            <button class="change-btn" (click)="changeAddress()">Change Delivery Details</button>
+            <button class="change-btn" (click)="changeAddress(editDeliveryModal)">Change Delivery Details</button>
         </div>
     </div>
 </div>
@@ -54,3 +54,58 @@
 <div class="submit-container">
     <button class="submit-btn" (click)="submitOrder()">Submit</button>
 </div>
+
+<ng-template #editDeliveryModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Delivery Details</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+    </div>
+
+    <form [formGroup]="editForm" (ngSubmit)="saveDeliveryDetails(modal)">
+        <div class="modal-body">
+
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" formControlName="name" class="form-control"
+                    [ngClass]="{'is-invalid': editForm.get('name')?.touched && editForm.get('name')?.invalid}" />
+                <div *ngIf="editForm.get('name')?.touched && editForm.get('name')?.invalid" class="invalid-feedback">
+                    <small *ngIf="editForm.get('name')?.errors?.['required']">
+                        Name is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Contact Number</label>
+                <input type="text" formControlName="phone" class="form-control"
+                    [ngClass]="{'is-invalid': editForm.get('phone')?.touched && editForm.get('phone')?.invalid}" />
+                <div *ngIf="editForm.get('phone')?.touched && editForm.get('phone')?.invalid" class="invalid-feedback">
+                    <small *ngIf="editForm.get('phone')?.errors?.['required']">
+                        Phone number is required.
+                    </small>
+                    <small *ngIf="editForm.get('phone')?.errors?.['pattern']">
+                        Enter a valid number (10 digits or +91XXXXXXXXXX).
+                    </small>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Address</label>
+                <textarea formControlName="address" class="form-control"
+                    [ngClass]="{'is-invalid': editForm.get('address')?.touched && editForm.get('address')?.invalid}"></textarea>
+                <div *ngIf="editForm.get('address')?.touched && editForm.get('address')?.invalid"
+                    class="invalid-feedback">
+                    <small *ngIf="editForm.get('address')?.errors?.['required']">
+                        Address is required.
+                    </small>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
+            <button type="submit" class="btn btn-danger" [disabled]="editForm.invalid">Save</button>
+        </div>
+    </form>
+</ng-template>

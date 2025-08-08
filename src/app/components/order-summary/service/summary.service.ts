@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SummaryService {
   private UserUrl = `${environment.apiUrl}/users`
+  private OrderUrl = `${environment.apiUrl}/orders`
 
   constructor(
     private http: HttpClient
@@ -14,5 +15,9 @@ export class SummaryService {
 
   getUser(id: string) {
     return this.http.get(`${this.UserUrl}/${id}`)
+  }
+
+  newOrder(itm: any) {
+    return this.http.post(`${this.OrderUrl}/customer`, itm)
   }
 }
