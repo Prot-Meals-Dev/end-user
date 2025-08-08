@@ -26,6 +26,9 @@ export class OrderSummaryComponent implements OnInit {
 
   editForm!: FormGroup;
 
+  orderSuccess = false;
+  showGoHomeBtn = false;
+
   constructor(
     private router: Router,
     private service: SummaryService,
@@ -134,6 +137,12 @@ export class OrderSummaryComponent implements OnInit {
           autoDismiss: true,
           duration: 4000
         });
+
+        this.orderSuccess = true;
+        setTimeout(() => {
+          this.showGoHomeBtn = true;
+        }, 2000);
+
       },
       error: (err) => {
         this.alertService.showAlert({
@@ -144,6 +153,10 @@ export class OrderSummaryComponent implements OnInit {
         });
       }
     });
+  }
+
+  goHome() {
+    this.router.navigate(['/home']);
   }
 
   initEditForm() {
