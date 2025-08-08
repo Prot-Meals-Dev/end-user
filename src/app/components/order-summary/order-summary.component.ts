@@ -18,6 +18,7 @@ export class OrderSummaryComponent implements OnInit {
   totalAmount: number = 0;
   user: any;
   userDetails!: any;
+  isLoading = true;
 
   mealTypes: string[] = [];
   selectedDays: string[] = [];
@@ -60,9 +61,11 @@ export class OrderSummaryComponent implements OnInit {
     this.service.getUser(this.user.id).subscribe({
       next: (res: any) => {
         this.userDetails = res.data;
+        this.isLoading = false;
       },
       error: (err: any) => {
         console.error(err);
+        this.isLoading = false;
       }
     })
   }

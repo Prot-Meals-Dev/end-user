@@ -4,7 +4,14 @@
             <img src="/logo.png" alt="">
         </div>
         <!-- Order Summary Card -->
-        <div class="card-box">
+
+        <div *ngIf="isLoading" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+            <div class="spinner-border text-danger" role="status" style="width: 4rem; height: 4rem;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <div *ngIf="!isLoading" class="card-box">
             <div class="card-header">Order Summary</div>
 
             <div class="meal-types">{{ mealTypes.join(' $ ') }}</div>
@@ -29,7 +36,7 @@
         </div>
 
         <!-- Delivery Details Card -->
-        <div class="card-box">
+        <div *ngIf="!isLoading" class="card-box">
             <div class="card-header">Delivery Details</div>
 
             <div class="info-line">
@@ -57,19 +64,18 @@
 </div>
 
 <div *ngIf="orderSuccess" class="success-overlay">
-  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-    <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10"
-      cx="65.1" cy="65.1" r="62.1" />
-    <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6"
-      stroke-linecap="round" stroke-miterlimit="10"
-      points="100.2,40.2 51.5,88.8 29.8,67.5" />
-  </svg>
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+        <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1"
+            cy="65.1" r="62.1" />
+        <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round"
+            stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5" />
+    </svg>
 
-  <p class="success-text">Order Placed Successfully!</p>
+    <p class="success-text">Order Placed Successfully!</p>
 
-  <div *ngIf="showGoHomeBtn" class="go-home">
-    <button (click)="goHome()">Go Back to Home</button>
-  </div>
+    <div *ngIf="showGoHomeBtn" class="go-home">
+        <button (click)="goHome()">Go Back to Home</button>
+    </div>
 </div>
 
 <ng-template #editDeliveryModal let-modal>
