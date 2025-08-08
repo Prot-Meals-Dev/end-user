@@ -52,6 +52,10 @@
                 </tr>
             </tbody>
         </table>
+        <pagination class="d-flex justify-content-center mt-3 custom-pagination" [totalItems]="totalItems"
+            [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" previousText="‹" nextText="›" [boundaryLinks]="true"
+            (pageChanged)="onPageChange($event)">
+        </pagination>
     </div>
 
 </div>

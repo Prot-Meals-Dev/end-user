@@ -56,7 +56,7 @@ export class OrdersComponent implements OnInit {
     this.service.getOrdersList(this.filters).subscribe({
       next: (res: any) => {
         this.orderList = res.data.data || [];
-        this.totalItems = res.data.total || 0;
+        this.totalItems = res.data.pagination?.total || 0;
         this.isLoading = false;
       },
       error: (err) => {
