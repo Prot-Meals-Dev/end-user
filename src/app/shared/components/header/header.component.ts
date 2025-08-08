@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   }
 
   checkLoginStatus() {
-    this.isLoggedIn = this.authService.isLoggedIn();
+    this.isLoggedIn = this.authService.isLoggedIn();    
     this.user = this.isLoggedIn ? this.authService.getUser() : null;
   }
 
@@ -50,9 +50,7 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  goTo(link: string) {
-    console.log(link);
-    
+  goTo(link: string) {    
     this.router.navigate([link]);
   }
 

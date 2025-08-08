@@ -57,11 +57,11 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    const token = this.getToken();
+    const token = this.getToken();    
     return token !== null && !this.isTokenExpired(token);
   }
 
-  private isTokenExpired(token: string): boolean {
+  public isTokenExpired(token: string): boolean {
     try {
       const payloadBase64 = token.split('.')[1];
       const payloadJson = atob(payloadBase64);

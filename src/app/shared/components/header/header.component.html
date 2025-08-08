@@ -16,7 +16,7 @@
                     <i class="bi bi-person-circle"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">My Profile</a></li>
+                    <li type="button" class="dropdown-item" (click)="goTo('/profile')">My Profile</li>
                     <li type="button" class="dropdown-item" (click)="goTo('/orders')">My Orders</li>
                     <li>
                         <hr class="dropdown-divider">
@@ -50,7 +50,7 @@
                         <i class="bi bi-person-circle"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">My Profile</a></li>
+                        <li type="button" class="dropdown-item" (click)="goTo('/profile')">My Profile</li>
                         <li type="button" class="dropdown-item" (click)="goTo('/orders')">My Orders</li>
                         <li>
                             <hr class="dropdown-divider">

@@ -1,1 +1,21 @@
-<p>profile works!</p>
+<div class="container-fluid profile-container">
+    <!-- Company Logo -->
+    <div class="img">
+        <img src="/logo.png" alt="Company Logo" />
+    </div>
+
+    <!-- Profile Content -->
+    <div class="content">
+        <div class="heading">
+            <h3>My Profile</h3>
+        </div>
+
+        <div class="details">
+            <p><strong>Name:</strong> {{ profile?.name || 'Not provided' }}</p>
+            <p><strong>Email:</strong> {{ profile?.email || 'Not provided' }}</p>
+            <p><strong>Phone:</strong> {{ profile?.phone || 'Not provided' }}</p>
+            <p><strong>Region:</strong> {{ profile?.region || 'Not provided' }}</p>
+            <p><strong>Address:</strong> {{ profile?.address || 'Not provided' }}</p>
+        </div>
+    </div>
+</div>

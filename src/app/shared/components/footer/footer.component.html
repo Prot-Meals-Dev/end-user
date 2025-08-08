@@ -14,12 +14,12 @@
             <div class="center">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li>Home</li>
-                    <li>About</li>
+                    <li (click)="goTo('/')">Home</li>
+                    <li (click)="goTo('#about')">About</li>
                     <li>Service</li>
                     <li>Cancellation Policy</li>
-                    <li>Privacy Policy</li>
-                    <li>Terms and Conditions</li>
+                    <li (click)="goTo('/privacy-policy')">Privacy Policy</li>
+                    <li (click)="goTo('/terms-and-conditions')">Terms and Conditions</li>
                     <li>Join as our partner</li>
                 </ul>
             </div>
