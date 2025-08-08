@@ -19,49 +19,39 @@
         <table class="table custom-table align-middle text-center table-hover">
             <thead class="table-light">
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Start Date</th>
-                    <!-- <th>Delivering Today</th> -->
+                    <!-- <th>Order ID</th> -->
+                    <th>Meals</th>
+                    <th>Weekdays</th>
                     <th>Meal Type</th>
-                    <!-- <th>Payment Status</th> -->
+                    <th>Start Date</th>
+                    <th>End Date</th>
                     <th>Status</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let order of orderList">
-                    <td>{{ order.order_id }}</td>
-                    <td>{{ order.name }}</td>
-                    <td>{{ order.delivery_address }}</td>
+                    <!-- <td>{{ order.order_id }}</td> -->
+
+                    <td>{{ getMeals(order.preferences) }}</td>
+
+                    <td>
+                        {{ getWeekdays(order.preferences) }}
+                    </td>
+
+                    <td>{{ order.meal_type.name }}</td>
+
                     <td>{{ order.start_date | date: 'dd-MM-yyyy' }}</td>
-                    <!-- <td (click)="goToOrderDetail(order.id)">{{'Maybe'}}</td> -->
-                    <td>{{ order.meal_type_name }}</td>
-                    <!-- <td>
-                        <span class="badge px-3 py-2"
-                            [ngClass]="order.paymentStatus === 'Paid' ? 'bg-success-subtle text-success' : 'bg-warning-subtle text-warning'">
-                            {{ order.paymentStatus }}
-                        </span>
-                    </td> -->
+                    <td>{{ order.end_date | date: 'dd-MM-yyyy' }}</td>
+
                     <td>
                         <span class="badge px-3 py-2"
-                            [ngClass]="order.status === 'active' ? 'bg-success-subtle text-success' : 'bg-secondary-subtle text-secondary'">
-                            {{ order.status === 'active' ? 'active' : 'paused' }}
+                            [ngClass]="order.status === 'completed' ? 'bg-success-subtle text-success' : 'bg-secondary-subtle text-secondary'">
+                            {{ order.status }}
                         </span>
                     </td>
-                    <!-- <td class="action-icons">
-                        <i class="bi bi-pencil-square edit-icon" role="button" title="Edit Order"
-                            (click)="editOrder(order, content)"></i>
-                        <i class="bi bi-pause-circle pause-icon" role="button" title="Pause Order"
-                            (click)="toggleOrderStatus(order)"></i>
-                    </td> -->
                 </tr>
             </tbody>
         </table>
-        <pagination class="d-flex justify-content-center mt-3 custom-pagination" [totalItems]="totalItems"
-            [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" previousText="‹" nextText="›" [boundaryLinks]="true"
-            (pageChanged)="onPageChange($event)">
-        </pagination>
     </div>
+
 </div>

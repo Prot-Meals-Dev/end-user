@@ -24,6 +24,16 @@ export class OrdersComponent implements OnInit {
   itemsPerPage = 10;
   totalItems = 0;
 
+  weekdayMap: { [key: number]: string } = {
+    0: 'Sun',
+    1: 'Mon',
+    2: 'Tue',
+    3: 'Wed',
+    4: 'Thu',
+    5: 'Fri',
+    6: 'Sat'
+  };
+
   constructor(
     private service: OrderService,
     private alertService: AlertService
@@ -62,11 +72,29 @@ export class OrdersComponent implements OnInit {
     })
   }
 
-    onPageChange(event: { page: number; itemsPerPage: number }) {
+  onPageChange(event: { page: number; itemsPerPage: number }) {
     if (this.currentPage !== event.page) {
       this.currentPage = event.page;
       this.itemsPerPage = event.itemsPerPage;
       this.loadOrderList();
     }
   }
+
+  getWeekdays(preferences: any[]): string {
+    if (!preferences || preferences.length === 0) return '';
+    return preferences
+      .map(p => this.weekdayMap[p.week_day])
+      .join(', ');
+  }
+
+  getMeals(preferences: any[]): string {
+    if (!preferences || preferences.length === 0) return '';
+    const p = preferences[0];
+    const meals: string[] = [];
+    if (p.breakfast) meals.push('Breakfast');
+    if (p.lunch) meals.push('Lunch');
+    if (p.dinner) meals.push('Dinner');
+    return meals.join(' | ');
+  }
+  
 }
