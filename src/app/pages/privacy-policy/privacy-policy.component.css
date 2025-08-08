@@ -1,0 +1,15 @@
+.container h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.container h3 {
+    margin-top: 2rem;
+    font-weight: 600;
+}
+
+.container p,
+.container li {
+    font-size: 1rem;
+    line-height: 1.6;
+}
