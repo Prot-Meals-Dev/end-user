@@ -395,7 +395,7 @@
 }
 
 .lives {
-    background-color: #F9EDE1;
+    background-color: rgba(193, 40, 45, 0.18);;
     display: flex;
     align-items: center;
     justify-content: center;
