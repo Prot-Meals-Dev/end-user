@@ -65,21 +65,27 @@
         <div class="why-cards">
             <div class="why-card card-1">
                 <img [src]="whyCards[0].img" alt="">
-                <h4>{{ whyCards[0].head }}</h4>
-                <h4><span class="red-text">{{ whyCards[0].head2 }}</span></h4>
-                <p>{{ whyCards[0].para }}</p>
+                <div class="text-content">
+                    <h4>{{ whyCards[0].head }}</h4>
+                    <h4><span class="red-text">{{ whyCards[0].head2 }}</span></h4>
+                    <p>{{ whyCards[0].para }}</p>
+                </div>
             </div>
             <div class="why-card card-2">
                 <img [src]="whyCards[1].img" alt="">
-                <h4>{{ whyCards[1].head }}</h4>
-                <h4><span class="red-text">{{ whyCards[1].head2 }}</span></h4>
-                <p>{{ whyCards[1].para }}</p>
+                <div class="text-content">
+                    <h4>{{ whyCards[1].head }}</h4>
+                    <h4><span class="red-text">{{ whyCards[1].head2 }}</span></h4>
+                    <p>{{ whyCards[1].para }}</p>
+                </div>
             </div>
             <div class="why-card card-3">
                 <img [src]="whyCards[2].img" alt="">
-                <h4>{{ whyCards[2].head }}</h4>
-                <h4><span class="red-text">{{ whyCards[2].head2 }}</span></h4>
-                <p>{{ whyCards[2].para }}</p>
+                <div class="text-content">
+                    <h4>{{ whyCards[2].head }}</h4>
+                    <h4><span class="red-text">{{ whyCards[2].head2 }}</span></h4>
+                    <p>{{ whyCards[2].para }}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -199,7 +205,8 @@
             ProtMeals delivers nourishing food
             that feels like it was made just for you. With every bite, enjoy the perfect balance of taste, health, and
             comfort. It's more than just
-            a meal—it's a moment of warmth and wellness. 🍽️ <br/> ProtMeals - because you deserve joy in every bite</p>
+            a meal—it's a moment of warmth and wellness. 🍽️ <br /> ProtMeals - because you deserve joy in every bite
+        </p>
         <button (click)="goToMenu()">EXPLORE NOW</button>
     </div>
 
