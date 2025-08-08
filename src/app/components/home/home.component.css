@@ -91,6 +91,7 @@
     padding: 1rem;
     border-radius: 1rem;
     text-align: center;
+    justify-content: center;
 }
 
 /* Card Colors */
@@ -644,7 +645,6 @@
 @media (max-width: 768px) {
     .hero-top {
         flex-direction: column;
-        text-align: center;
     }
 
     .hero-top-headings h3 {
@@ -656,19 +656,20 @@
         width: 90%;
     }
 
-    .hero-top-cards {
-        grid-template-columns: 1fr;
-    }
-
     .hero-bottom {
         flex-direction: column;
         align-items: flex-start;
+        gap: 0;
     }
 
     .hero-bottom button {
         width: 100%;
         text-align: center;
     }
+/* 
+    .why-card{
+        display: flex;
+    } */
 
     .about {
         flex-direction: column;
