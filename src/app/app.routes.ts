@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,5 +20,6 @@ export const routes: Routes = [
     { path: 'profile', component: ProfileComponent },
     { path: 'login', component: LoginComponent },
     { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
-    { path: 'privacy-policy', component: PrivacyPolicyComponent }
+    { path: 'privacy-policy', component: PrivacyPolicyComponent },
+    { path: 'contact', component: ContactComponent }
 ];

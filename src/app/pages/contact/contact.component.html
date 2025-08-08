@@ -1,0 +1,41 @@
+<div class="container-fluid contact-section">
+    <div class="headings">
+        <h3>CONTACT US</h3>
+        <p>Fill out the form to connect with our team for inquiries, suggestions, feedback, or ways you can contribute
+            to help us improve.</p>
+    </div>
+
+    <div class="contact-form">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+            <div class="form-row form-first">
+                <input type="text" placeholder="First Name" formControlName="firstName">
+                <input type="text" placeholder="Last Name" formControlName="lastName">
+            </div>
+
+            <div class="form-row form-second">
+                <input type="text" placeholder="Phone" formControlName="phone">
+                <input type="text" placeholder="Email" formControlName="email">
+            </div>
+
+            <textarea placeholder="Your Message" formControlName="message"></textarea>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="agree" formControlName="agree">
+                <div class="checkbox-text">
+                    <label for="agree">
+                        By clicking “Submit” you are agreeing to share your personal information
+                        for the purpose of responding to enquiries.
+                    </label>
+                    <span>
+                        For more information, kindly go through our
+                        <a routerLink="/privacy-policy">Privacy Policy</a> and
+                        <a routerLink="/terms-of-use">Terms of Use</a>.
+                    </span>
+                </div>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+</div>
