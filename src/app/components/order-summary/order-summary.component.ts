@@ -134,7 +134,7 @@ export class OrderSummaryComponent implements OnInit {
         this.orderSuccess = true;
         setTimeout(() => {
           this.showGoHomeBtn = true;
-        }, 2000);
+        }, 1000);
 
       },
       error: (err) => {
