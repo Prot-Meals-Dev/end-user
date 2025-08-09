@@ -1,21 +1,73 @@
 <div class="container-fluid profile-container">
-    <!-- Company Logo -->
     <div class="img">
         <img src="/logo.png" alt="Company Logo" />
     </div>
 
-    <!-- Profile Content -->
-    <div class="content">
+    <div *ngIf="isLoading" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+        <div class="spinner-border text-danger" role="status" style="width: 4rem; height: 4rem;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading" class="content">
         <div class="heading">
             <h3>My Profile</h3>
+            <button class="btn btn-outline-primary btn-sm" (click)="toggleEdit()">
+                {{ isEditMode ? 'Cancel' : 'Edit' }}
+            </button>
+
         </div>
 
-        <div class="details">
+        <div *ngIf="!isEditMode" class="details">
             <p><strong>Name:</strong> {{ profile?.name || 'Not provided' }}</p>
             <p><strong>Email:</strong> {{ profile?.email || 'Not provided' }}</p>
             <p><strong>Phone:</strong> {{ profile?.phone || 'Not provided' }}</p>
-            <p><strong>Region:</strong> {{ profile?.region || 'Not provided' }}</p>
             <p><strong>Address:</strong> {{ profile?.address || 'Not provided' }}</p>
         </div>
+
+        <form *ngIf="isEditMode" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="name" class="form-label"><strong>Name:</strong></label>
+                <input id="name" type="text" class="form-control" formControlName="name" />
+                <div class="text-danger mt-1"
+                    *ngIf="profileForm.get('name')?.touched && profileForm.get('name')?.invalid">
+                    <small *ngIf="profileForm.get('name')?.errors?.['required']">Name is required.</small>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label"><strong>Email:</strong></label>
+                <input id="email" type="email" class="form-control" formControlName="email" />
+                <div class="text-danger mt-1"
+                    *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.invalid">
+                    <small *ngIf="profileForm.get('email')?.errors?.['required']">Email is required.</small>
+                    <small *ngIf="profileForm.get('email')?.errors?.['email']">Please enter a valid email.</small>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="phone" class="form-label"><strong>Phone:</strong></label>
+                <input id="phone" type="tel" class="form-control" formControlName="phone" />
+                <div class="text-danger mt-1"
+                    *ngIf="profileForm.get('phone')?.touched && profileForm.get('phone')?.invalid">
+                    <small *ngIf="profileForm.get('phone')?.errors?.['required']">Phone number is required.</small>
+                    <small *ngIf="profileForm.get('phone')?.errors?.['pattern']">Enter a valid 10-digit phone number or
+                        +91 followed by 10 digits.</small>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="address" class="form-label"><strong>Address:</strong></label>
+                <textarea id="address" class="form-control" formControlName="address" rows="3"></textarea>
+                <div class="text-danger mt-1"
+                    *ngIf="profileForm.get('address')?.touched && profileForm.get('address')?.invalid">
+                    <small *ngIf="profileForm.get('address')?.errors?.['required']">Address is required.</small>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success me-2" [disabled]="profileForm.invalid">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+        </form>
+
     </div>
 </div>

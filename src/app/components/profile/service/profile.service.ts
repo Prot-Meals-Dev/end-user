@@ -16,4 +16,8 @@ export class ProfileService {
   getUser(id: string) {
     return this.http.get(`${this.BaseUrl}/${id}`)
   }
+
+  updateUser(itm: any) {
+    return this.http.patch(`${this.BaseUrl}/profile`, itm)
+  }
 }
