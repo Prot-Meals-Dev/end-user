@@ -134,19 +134,10 @@ export class OrderSummaryComponent implements OnInit {
 
     this.service.newOrder(payload).subscribe({
       next: (res) => {
-        this.orderSuccess = true;
-        setTimeout(() => {
-          this.showGoHomeBtn = true;
-        }, 1000);
-
+        this.router.navigate(['/failed'])
       },
       error: (err) => {
-        this.alertService.showAlert({
-          message: 'Failed to submit order.',
-          type: 'error',
-          autoDismiss: true,
-          duration: 4000
-        });
+        this.router.navigate(['/failed'])
       }
     });
   }
