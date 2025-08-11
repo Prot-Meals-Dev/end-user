@@ -80,7 +80,7 @@ export class MenuComponent implements OnInit {
   loadMealTypes() {
     this.service.getMealTypes().subscribe({
       next: (res: any) => {
-        this.currentMealType = res.data;        
+        this.currentMealType = res.data;
       },
       error: (err: any) => {
         console.error(err);
@@ -201,26 +201,47 @@ export class MenuComponent implements OnInit {
     const startDate = new Date(form.startDate.year, form.startDate.month - 1, form.startDate.day);
     const endDate = new Date(form.endDate.year, form.endDate.month - 1, form.endDate.day);
 
-    const diffInMs = endDate.getTime() - startDate.getTime();
-    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-    const weeks = Math.floor(diffInDays / 7);
+    if (endDate < startDate) {
+      this.totalAmount = 0;
+      return;
+    }
 
-    const recurringDays = form.recurringDays;
-    const daysSelected = Object.values(recurringDays).filter(Boolean).length;
+    const recurringDaysMap: Record<string, number> = {
+      Sun: 0,
+      Mon: 1,
+      Tue: 2,
+      Wed: 3,
+      Thu: 4,
+      Fri: 5,
+      Sat: 6,
+    };
 
-    let totalPerDay = 0;
+    const selectedDayIndexes = Object.entries(form.recurringDays)
+      .filter(([day, selected]) => selected)
+      .map(([day]) => recurringDaysMap[day]);
 
+    let totalDeliveryDays = 0;
+    let current = new Date(startDate);
+
+    while (current <= endDate) {
+      if (selectedDayIndexes.includes(current.getDay())) {
+        totalDeliveryDays++;
+      }
+      current.setDate(current.getDate() + 1);
+    }
+
+    let total = 0;
     if (form.breakfast) {
-      totalPerDay += parseFloat(this.currentMealType[0].breakfast_price || '0');
+      total += parseFloat(this.currentMealType[0].breakfast_price || '0') * totalDeliveryDays;
     }
     if (form.lunch) {
-      totalPerDay += parseFloat(this.currentMealType[0].lunch_price || '0');
+      total += parseFloat(this.currentMealType[0].lunch_price || '0') * totalDeliveryDays;
     }
     if (form.dinner) {
-      totalPerDay += parseFloat(this.currentMealType[0].dinner_price || '0');
+      total += parseFloat(this.currentMealType[0].dinner_price || '0') * totalDeliveryDays;
     }
 
-    this.totalAmount = weeks * daysSelected * totalPerDay;
+    this.totalAmount = total;
   }
 
 }
