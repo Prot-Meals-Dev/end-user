@@ -133,11 +133,15 @@ export class OrderSummaryComponent implements OnInit {
     };
 
     this.service.newOrder(payload).subscribe({
-      next: (res) => {
-        this.router.navigate(['/success'])
+      next: (res: any) => {
+        if (res?.success) {
+          this.openRazorpay(res.data);
+        } else {
+          this.router.navigate(['/failed']);
+        }
       },
-      error: (err) => {
-        this.router.navigate(['/failed'])
+      error: () => {
+        this.router.navigate(['/failed']);
       }
     });
   }
@@ -172,6 +176,40 @@ export class OrderSummaryComponent implements OnInit {
         duration: 4000
       });
     }
+  }
+
+  openRazorpay(data: any) {
+    const options: any = {
+      key: data.keyId,
+      amount: data.amount,
+      currency: data.currency,
+      name: data.name,
+      description: data.description,
+      order_id: data.razorpay_order_id,
+      prefill: data.prefill,
+      notes: data.notes,
+      handler: (response: any) => {
+        console.log('Payment success', response);
+        this.service.verifyPayment({
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_signature: response.razorpay_signature,
+        }).subscribe({
+          next: () => this.router.navigate(['/success']),
+          error: () => this.router.navigate(['/failed'])
+        });
+        // this.modalService.dismissAll()
+      },
+      modal: {
+        ondismiss: () => {
+          console.error('Payment popup closed');
+          this.router.navigate(['/failed']);
+        }
+      }
+    };
+
+    const rzp = new (window as any).Razorpay(options);
+    rzp.open();
   }
 
 }

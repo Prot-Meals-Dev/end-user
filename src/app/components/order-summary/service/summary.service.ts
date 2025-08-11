@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class SummaryService {
   private UserUrl = `${environment.apiUrl}/users`
   private OrderUrl = `${environment.apiUrl}/orders`
+  private PaymentUrl = `${environment.apiUrl}/payments`;
 
   constructor(
     private http: HttpClient
@@ -19,5 +20,11 @@ export class SummaryService {
 
   newOrder(itm: any) {
     return this.http.post(`${this.OrderUrl}/customer`, itm)
+  }
+
+  verifyPayment(payload: any) {
+    console.log(payload);
+    
+    return this.http.post(`${this.PaymentUrl}/razorpay/verify`, payload);
   }
 }
