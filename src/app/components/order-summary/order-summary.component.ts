@@ -134,7 +134,7 @@ export class OrderSummaryComponent implements OnInit {
 
     this.service.newOrder(payload).subscribe({
       next: (res) => {
-        this.router.navigate(['/failed'])
+        this.router.navigate(['/success'])
       },
       error: (err) => {
         this.router.navigate(['/failed'])
