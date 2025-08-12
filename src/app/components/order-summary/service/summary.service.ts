@@ -22,9 +22,7 @@ export class SummaryService {
     return this.http.post(`${this.OrderUrl}/customer`, itm)
   }
 
-  verifyPayment(payload: any) {
-    console.log(payload);
-    
+  verifyPayment(payload: any) {    
     return this.http.post(`${this.PaymentUrl}/razorpay/verify`, payload);
   }
 }
