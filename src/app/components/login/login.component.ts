@@ -83,8 +83,14 @@ export class LoginComponent implements OnInit {
 
   startOtpFlow(email: string) {
     this.authService.requestOtp(email).subscribe({
-      next: () => {
+      next: (res:any) => {        
         this.isOtpSent = true;
+        this.alertService.showAlert({
+          message: `OTP is :- ${res.data.otp}`,
+          type: 'info',
+          autoDismiss: true,
+          duration: 6000
+        });
         this.otpForm.get('email')?.disable();
         this.counter = 90;
         this.updateCountdown();
