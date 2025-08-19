@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AlertService } from '../../shared/components/alert/service/alert.service';
+import { MenuService } from '../menu/service/menu.service';
 
 @Component({
   selector: 'app-order-summary',
@@ -21,6 +22,7 @@ export class OrderSummaryComponent implements OnInit {
   isLoading = true;
 
   mealTypes: string[] = [];
+  mealTypeID!: any;
   selectedDays: string[] = [];
   formattedStartDate: string = '';
   formattedEndDate: string = '';
@@ -35,7 +37,8 @@ export class OrderSummaryComponent implements OnInit {
     private service: SummaryService,
     private modalService: NgbModal,
     private fb: FormBuilder,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private menuService: MenuService
   ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras?.state as {
@@ -53,8 +56,16 @@ export class OrderSummaryComponent implements OnInit {
     this.extractMealTypes();
     this.extractRecurringDays();
     this.formatDates();
-
+    this.loadMealTypes()
     this.getUserDetails()
+  }
+
+  loadMealTypes() {
+    this.menuService.getMealTypes().subscribe({
+      next: (res: any) => {
+        this.mealTypeID = res.data[0].id;
+      }
+    })
   }
 
   getUserDetails() {
@@ -116,7 +127,7 @@ export class OrderSummaryComponent implements OnInit {
       contact_number: this.userDetails.phone,
       delivery_address: this.userDetails.address,
 
-      meal_type_id: "2296546c-c788-47a7-94a5-35cfa041b2db",
+      meal_type_id: this.mealTypeID,
 
       start_date: `${this.formData.startDate.year}-${String(this.formData.startDate.month).padStart(2, '0')}-${String(this.formData.startDate.day).padStart(2, '0')}`,
       end_date: `${this.formData.endDate.year}-${String(this.formData.endDate.month).padStart(2, '0')}-${String(this.formData.endDate.day).padStart(2, '0')}`,
@@ -133,7 +144,7 @@ export class OrderSummaryComponent implements OnInit {
     };
 
     this.service.newOrder(payload).subscribe({
-      next: (res: any) => {        
+      next: (res: any) => {
         if (res?.success) {
           this.openRazorpay(res.data);
         } else {
