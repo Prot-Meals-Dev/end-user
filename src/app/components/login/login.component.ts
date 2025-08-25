@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   signupForm: FormGroup;
 
   isOtpSent = false;
+  isSendingOtp = false;
   counter = 90;
   countdownDisplay = '1:30';
   intervalId: any;
@@ -70,23 +71,30 @@ export class LoginComponent implements OnInit {
   }
 
   sendOtp() {
-    if (this.otpForm.get('email')?.invalid || this.isOtpSent) return;
+    if (this.otpForm.get('email')?.invalid || this.isOtpSent || this.isSendingOtp) return;
 
     const email = this.otpForm.get('email')?.value;
     this.startOtpFlow(email);
   }
 
   resendOtp() {
+    if (this.isSendingOtp) return;
+
     const email = this.otpForm.get('email')?.value;
     this.startOtpFlow(email);
   }
 
   startOtpFlow(email: string) {
+    this.isSendingOtp = true;
+
     this.authService.requestOtp(email).subscribe({
-      next: (res:any) => {        
+      next: (res: any) => {
+        console.log(res);
+        const message = res.data.otp ? `OTP is :- ${res.data.otp}` : res.data?.message || 'Something went wrong';
+        this.isOtpSent = true;
         this.isOtpSent = true;
         this.alertService.showAlert({
-          message: `OTP is :- ${res.data.otp}`,
+          message: message,
           type: 'info',
           autoDismiss: true,
           duration: 6000
@@ -112,6 +120,9 @@ export class LoginComponent implements OnInit {
           autoDismiss: true,
           duration: 4000
         });
+      },
+      complete: () => {
+        this.isSendingOtp = false;
       }
     });
   }

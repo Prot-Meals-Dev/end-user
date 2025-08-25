@@ -14,9 +14,13 @@
             <input formControlName="email" type="email" placeholder="Enter your email" required />
         </div>
 
-        <button type="button" class="send-otp-btn" (click)="sendOtp()" *ngIf="!isOtpSent">
-            Send OTP
+        <button type="button" class="send-otp-btn" (click)="sendOtp()" *ngIf="!isOtpSent" [disabled]="isSendingOtp">
+            <ng-container *ngIf="!isSendingOtp; else loadingTpl">Send OTP</ng-container>
         </button>
+
+        <ng-template #loadingTpl>
+            <span class="spinner-border spinner-border-sm text-light me-2"></span> Sending...
+        </ng-template>
 
         <div class="otp-inputs" *ngIf="isOtpSent">
             <input maxlength="1" *ngFor="let control of otpArray.controls; let i = index" [formControl]="control"
