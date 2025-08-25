@@ -111,16 +111,35 @@ export class MenuComponent implements OnInit {
     return null;
   }
 
-  recurringDaysValidator(control: AbstractControl): ValidationErrors | null {
+  recurringDaysValidator = (control: AbstractControl): ValidationErrors | null => {
     const days = control.get('recurringDays');
     if (!days) return null;
 
-    const anySelected = Object.values(days.value).some(val => val);
-    if (!anySelected) {
+    const selectedDays = Object.values(days.value).filter(val => val).length;
+
+    // Get start & end dates
+    const start = control.get('startDate')?.value;
+    const end = control.get('endDate')?.value;
+
+    if (!start || !end) {
+      return selectedDays === 0 ? { noRecurringDay: true } : null;
+    }
+
+    const startDate = new Date(start.year, start.month - 1, start.day);
+    const endDate = new Date(end.year, end.month - 1, end.day);
+
+    const diffDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
+
+    if (selectedDays === 0) {
       return { noRecurringDay: true };
     }
+
+    if (diffDays === 7 && selectedDays < 5) {
+      return { minRecurringDaysRequired: true };
+    }
+
     return null;
-  }
+  };
 
   isDateDisabled = (date: NgbDate, current?: { year: number; month: number }): boolean => {
     const todayDate = new Date(this.today.year, this.today.month - 1, this.today.day);
