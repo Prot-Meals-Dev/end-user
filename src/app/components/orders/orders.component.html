@@ -44,9 +44,13 @@
                     <td>{{ order.end_date | date: 'dd-MM-yyyy' }}</td>
 
                     <td>
-                        <span class="badge px-3 py-2"
-                            [ngClass]="order.status === 'completed' ? 'bg-success-subtle text-success' : 'bg-secondary-subtle text-secondary'">
-                            {{ order.status }}
+                        <span class="badge px-3 py-2" [ngClass]="{
+      'bg-success-subtle text-success': order.status === 'active',
+      'bg-warning-subtle text-warning': order.status === 'pending',
+      'bg-info-subtle text-info': order.status === 'paused',
+      'bg-secondary-subtle text-secondary': order.status !== 'active' && order.status !== 'pending' && order.status !== 'paused'
+    }">
+                            {{ order.status | titlecase }}
                         </span>
                     </td>
                 </tr>
