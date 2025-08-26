@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SummaryService } from './service/summary.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AlertService } from '../../shared/components/alert/service/alert.service';
 import { MenuService } from '../menu/service/menu.service';
 
 @Component({
   selector: 'app-order-summary',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './order-summary.component.html',
   styleUrl: './order-summary.component.css'
 })
@@ -20,6 +20,9 @@ export class OrderSummaryComponent implements OnInit {
   user: any;
   userDetails!: any;
   isLoading = true;
+  couponCode: string = '';
+  discountAmount: number = 0;
+  finalPayable: number = 0;
 
   mealTypes: string[] = [];
   mealTypeID!: any;
@@ -58,6 +61,8 @@ export class OrderSummaryComponent implements OnInit {
     this.formatDates();
     this.loadMealTypes()
     this.getUserDetails()
+
+    this.finalPayable = this.totalAmount;
   }
 
   loadMealTypes() {
@@ -128,6 +133,7 @@ export class OrderSummaryComponent implements OnInit {
       delivery_address: this.userDetails.address,
 
       meal_type_id: this.mealTypeID,
+      coupon_code: this.couponCode || '',
 
       start_date: `${this.formData.startDate.year}-${String(this.formData.startDate.month).padStart(2, '0')}-${String(this.formData.startDate.day).padStart(2, '0')}`,
       end_date: `${this.formData.endDate.year}-${String(this.formData.endDate.month).padStart(2, '0')}-${String(this.formData.endDate.day).padStart(2, '0')}`,
@@ -221,6 +227,59 @@ export class OrderSummaryComponent implements OnInit {
 
     const rzp = new (window as any).Razorpay(options);
     rzp.open();
+  }
+
+  applyCoupon() {
+    if (!this.couponCode) {
+      this.alertService.showAlert({
+        message: 'Please enter a coupon code.',
+        type: 'warning',
+        autoDismiss: true,
+        duration: 3000
+      });
+      return;
+    }
+
+    this.service.validateCoupon(this.couponCode).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        
+        if (res?.success) {
+          this.discountAmount = res.data.discountPrice;
+          this.finalPayable = this.totalAmount - this.discountAmount;
+
+          this.alertService.showAlert({
+            message: `Coupon applied! You saved Rs ${this.discountAmount}`,
+            type: 'success',
+            autoDismiss: true,
+            duration: 4000
+          });
+        } else {
+          this.alertService.showAlert({
+            message: res.message || 'Invalid coupon code.',
+            type: 'error',
+            autoDismiss: true,
+            duration: 4000
+          });
+          this.resetCoupon();
+        }
+      },
+      error: () => {
+        this.alertService.showAlert({
+          message: 'Failed to validate coupon.',
+          type: 'error',
+          autoDismiss: true,
+          duration: 4000
+        });
+        this.resetCoupon();
+      }
+    });
+  }
+
+  resetCoupon() {
+    this.discountAmount = 0;
+    this.couponCode = ''
+    this.finalPayable = this.totalAmount;
   }
 
 }

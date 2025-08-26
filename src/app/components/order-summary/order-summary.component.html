@@ -29,9 +29,18 @@
                 <span class="value">{{ selectedDays.join(',') }}</span>
             </div>
 
+            <div class="coupon d-flex gap-2">
+                <input class="form-control" [(ngModel)]="couponCode" placeholder="Enter Coupon" type="text">
+                <button type="button" class="btn btn-danger" (click)="applyCoupon()">Apply</button>
+            </div>
+
+            <div *ngIf="discountAmount > 0" class="mt-2 text-success">
+                Discount Applied: - Rs {{ discountAmount }}
+            </div>
+
             <div class="card-bottom">
                 <span class="payable-label">Payable Amount:</span>
-                <span class="payable-value">Rs {{ totalAmount }}</span>
+                <span class="payable-value">Rs {{ finalPayable }}</span>
             </div>
         </div>
 

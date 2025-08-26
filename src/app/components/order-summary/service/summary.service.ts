@@ -9,6 +9,7 @@ export class SummaryService {
   private UserUrl = `${environment.apiUrl}/users`
   private OrderUrl = `${environment.apiUrl}/orders`
   private PaymentUrl = `${environment.apiUrl}/payments`;
+  private couponUrl = `${environment.apiUrl}/coupons`
 
   constructor(
     private http: HttpClient
@@ -24,5 +25,9 @@ export class SummaryService {
 
   verifyPayment(payload: any) {    
     return this.http.post(`${this.PaymentUrl}/razorpay/verify`, payload);
+  }
+
+  validateCoupon(code: string){
+    return this.http.get(`${this.couponUrl}/validate/${code}`)
   }
 }
