@@ -125,16 +125,18 @@
                 </div>
             </div>
 
-                <div class="mt-4">
-      <label for="remarks" class="form-label fw-semibold">Remarks (optional)</label>
-      <textarea
-        id="remarks"
-        rows="3"
-        class="form-control"
-        placeholder="Add any notes or special instructions..."
-        formControlName="remarks">
-      </textarea>
-    </div>
+            <div class="mt-4">
+                <label for="remarks" class="form-label fw-semibold">Remarks (optional)</label>
+                <textarea id="remarks" rows="3" class="form-control" maxlength="125" (input)="updateRemarksCount()"
+                    placeholder="Add any notes or special instructions..." formControlName="remarks"></textarea>
+                <div class="d-flex justify-content-between mt-1">
+                    <small class="text-muted">{{ remarksLength }}/125 characters</small>
+                    <div *ngIf="estimateForm.get('remarks')?.touched && estimateForm.get('remarks')?.errors?.['maxlength']"
+                        class="text-danger">
+                        Maximum 125 characters allowed.
+                    </div>
+                </div>
+            </div>
 
             <div class="estimate-amount">
                 <h5 class="fw-semibold">Pay: Rs {{ totalAmount }}/-</h5>

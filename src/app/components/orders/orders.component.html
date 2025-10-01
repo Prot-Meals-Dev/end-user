@@ -25,6 +25,7 @@
                     <th>Meal Type</th>
                     <th>Start Date</th>
                     <th>End Date</th>
+                    <th>Remarks</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -42,6 +43,7 @@
 
                     <td>{{ order.start_date | date: 'dd-MM-yyyy' }}</td>
                     <td>{{ order.end_date | date: 'dd-MM-yyyy' }}</td>
+                    <td>{{ order.remarks }}</td>
 
                     <td>
                         <span class="badge px-3 py-2" [ngClass]="{

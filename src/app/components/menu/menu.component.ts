@@ -27,6 +27,7 @@ export class MenuComponent implements OnInit {
   totalAmount = 0;
   isLoggedIn = false;
   user: any = null;
+  remarksLength = 0;
 
   constructor(
     private calendar: NgbCalendar,
@@ -43,7 +44,7 @@ export class MenuComponent implements OnInit {
       breakfast: [false],
       lunch: [false],
       dinner: [false],
-      remarks: [''],
+      remarks: ['', Validators.maxLength(125)],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
       recurringDays: this.fb.group({
@@ -262,6 +263,11 @@ export class MenuComponent implements OnInit {
     }
 
     this.totalAmount = total;
+  }
+
+  updateRemarksCount() {
+    const remarks = this.estimateForm.get('remarks')?.value || '';
+    this.remarksLength = remarks.length;
   }
 
 }
