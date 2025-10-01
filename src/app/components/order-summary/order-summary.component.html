@@ -28,6 +28,10 @@
                 <span class="label">Days Choosen:</span>
                 <span class="value">{{ selectedDays.join(',') }}</span>
             </div>
+            <div class="info-line">
+                <span class="label">Remarks:</span>
+                <span class="value">{{ formData?.remarks }}</span>
+            </div>
 
             <div class="coupon d-flex gap-2">
                 <input class="form-control" [(ngModel)]="couponCode" placeholder="Enter Coupon" type="text">

@@ -62,7 +62,7 @@ export class OrderSummaryComponent implements OnInit {
     this.loadMealTypes()
     this.getUserDetails()
 
-    this.finalPayable = this.totalAmount;
+    this.finalPayable = this.totalAmount;    
   }
 
   loadMealTypes() {
@@ -134,6 +134,7 @@ export class OrderSummaryComponent implements OnInit {
 
       meal_type_id: this.mealTypeID,
       coupon_code: this.couponCode || '',
+      remarks: this.formData.remarks,
 
       start_date: `${this.formData.startDate.year}-${String(this.formData.startDate.month).padStart(2, '0')}-${String(this.formData.startDate.day).padStart(2, '0')}`,
       end_date: `${this.formData.endDate.year}-${String(this.formData.endDate.month).padStart(2, '0')}-${String(this.formData.endDate.day).padStart(2, '0')}`,

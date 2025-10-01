@@ -43,6 +43,7 @@ export class MenuComponent implements OnInit {
       breakfast: [false],
       lunch: [false],
       dinner: [false],
+      remarks: [''],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
       recurringDays: this.fb.group({
