@@ -31,6 +31,17 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     if (this.contactForm.valid) {
+      const formData = this.contactForm.value;
+      const message = `Hello! 👋%0A
+Name: ${formData.firstName} ${formData.lastName}%0A
+Phone: ${formData.phone}%0A
+Email: ${formData.email}%0A
+Message: ${formData.message}`;
+
+      const phoneNumber = '917907656168';
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+      window.open(whatsappURL, '_blank');
+
       this.alertService.showAlert({
         message: 'Form submitted successfully!',
         type: 'success',
