@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../../../components/login/login.component';
@@ -18,7 +18,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private viewportScroller: ViewportScroller
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +27,7 @@ export class HeaderComponent implements OnInit {
   }
 
   checkLoginStatus() {
-    this.isLoggedIn = this.authService.isLoggedIn();    
+    this.isLoggedIn = this.authService.isLoggedIn();
     this.user = this.isLoggedIn ? this.authService.getUser() : null;
   }
 
@@ -50,8 +51,12 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  goTo(link: string) {    
+  goTo(link: string) {
     this.router.navigate([link]);
+  }
+
+  scrollToSection(sectionId: string) {
+    this.viewportScroller.scrollToAnchor(sectionId);
   }
 
 }
