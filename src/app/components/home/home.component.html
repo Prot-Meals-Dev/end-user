@@ -1,214 +1,477 @@
 <app-header></app-header>
 
 <div class="container-fluid">
-    <div class="hero">
-        <div class="hero-top">
-            <div class="hero-top-right">
-                <div class="hero-top-badge">
-                    <p>#No.1 Healthy food in Trivandrum</p>
+    <section class="hero">
+
+            <div class="hero-container">
+
+                <!-- LEFT -->
+                <div class="hero-left">
+
+                <div class="badge">
+                    #1 Meal Plan App
                 </div>
-                <div class="hero-top-headings">
-                    <h3>Wholesome Meals.</h3>
-                    <h3>Zero Hassle.</h3>
-                    <h3>Delivered Fresh</h3>
-                    <h3>Every Day.</h3>
-                    <p>✨ Enjoy chef-crafted meals made with love</p>
+
+                <h1>
+                    Enjoy your <br>
+                    <span>Delicious Food</span>
+                </h1>
+
+                <p>
+                    Flexible meal plans for your busy lifestyle.
+                    Pre-register now to get amazing discounts
+                    when we launch!
+                </p>
+
+                <div class="hero-buttons">
+                    
+                    <button class="btn-primary" (click)="goToMenu()">
+                    ORDER YOUR MEAL NOW
+                    </button>
+
+                    <button class="btn-secondary">
+                    View Plans
+                    </button>
                 </div>
-            </div>
-            <div class="hero-top-left">
-                <div class="hero-top-first">
-                    <div class="hero-top-second">
-                        <div class="hero-top-cards">
-                            <div>
-                                <i class="bi bi-clock-fill"></i>
-                                <p>30 Min Delivery</p>
-                            </div>
-                            <div>
-                                <i class="bi bi-shield-fill-check"></i>
-                                <p>100% Fresh</p>
-                            </div>
-                            <div>
-                                <i class="bi bi-people-fill"></i>
-                                <p>100+ Happy Customers</p>
-                            </div>
-                            <div>
-                                <i class="bi bi-star-fill"></i>
-                                4.9 Rating
-                            </div>
-                        </div>
+
+                </div>
+                <!-- RIGHT -->
+                <div class="hero-right">
+
+                <div class="circle-wrapper">
+                    <img src="hero.jpg" alt="food">
+                </div>
+
+                <!-- FLOATING CARD -->
+                <div class="floating-card">
+                    <i class="bi bi-shield-fill-check"></i>
+                    <div>
+                    <small>QUALITY</small>
+                    <strong>100% Hygiene</strong>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="hero-bottom">
-            <div class="hero-bottom-left">
-                <ul>
-                    <li>🥦 Balanced for Health & Taste</li>
-                    <li>⚡Boosts Energy, Fuels Focus</li>
-                </ul>
-            </div>
-            <div class="hero-bottom-right">
-                <ul>
-                    <li>👨‍💻 Perfect for Students & Professionals</li>
-                    <li>📆 Easy Scheduling </li>
-                </ul>
-            </div>
-        </div>
-        <button (click)="goToMenu()">ORDER YOUR MEAL NOW</button>
-    </div>
 
-    <div class="why">
-        <div class="why-headings">
-            <h3>WHY CHOOSE <span>PROTMEALS</span></h3>
-            <p>Just like home, ProtMeals ensures your food is balanced, fresh, and always on time.</p>
-        </div>
-        <div class="why-cards">
-            <div class="why-card card-1">
-                <img [src]="whyCards[0].img" alt="">
-                <div class="text-content">
-                    <h4>{{ whyCards[0].head }}</h4>
-                    <h4><span class="red-text">{{ whyCards[0].head2 }}</span></h4>
-                    <p>{{ whyCards[0].para }}</p>
                 </div>
-            </div>
-            <div class="why-card card-2">
-                <img [src]="whyCards[1].img" alt="">
-                <div class="text-content">
-                    <h4>{{ whyCards[1].head }}</h4>
-                    <h4><span class="red-text">{{ whyCards[1].head2 }}</span></h4>
-                    <p>{{ whyCards[1].para }}</p>
-                </div>
-            </div>
-            <div class="why-card card-3">
-                <img [src]="whyCards[2].img" alt="">
-                <div class="text-content">
-                    <h4>{{ whyCards[2].head }}</h4>
-                    <h4><span class="red-text">{{ whyCards[2].head2 }}</span></h4>
-                    <p>{{ whyCards[2].para }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="about" id="about">
-        <div class="about-left">
-            <div class="logo-circle">
-                <img src="/logo.png" alt="">
             </div>
-            <h1>ProtMeals</h1>
-        </div>
-        <div class="about-right">
-            <h2>ABOUT US</h2>
-            <p>
-                ProtMeals is a modern food brand delivering protein-rich meals designed to fit busy lifestyles.
-                Built on the idea that food should be both nutritious and joyful,
-                ProtMeals creates easy, satisfying options for people who want to eat well and feel good.
-            </p>
-        </div>
-    </div>
+            <div class="wave">
+                <svg viewBox="0 0 1440 180" preserveAspectRatio="none">
+                <path 
+                    d="M0,80 
+                    C240,140 
+                    480,20 
+                    720,80 
+                    C960,140 
+                    1200,20 
+                    1440,60 
+                    L1440,180 
+                    L0,180 
+                    Z"
+                    fill="#ffffff">
+                </path>
+                </svg>
+            </div>
+    </section>
+    <!-- next section -->
+    <section class="serve">
 
-    <div class="meals" id="meals">
-        <div class="meals-heading">
-            <h3>MEAL CATEGORIES</h3>
-        </div>
-        <!-- <div class="meals-protmeals">
-            <h4>Prot<span class="red-text">Meals</span></h4>
-            <h1>Coming Soon!</h1>
-        </div> -->
-        <div class="meals-homemeals">
-            <h4>Home<span class="red-text">Meals</span></h4>
-            <div class="meals-homemeals-cards">
-                <div class="meals-homemeals-card">
-                    <img src="/hmeal1.png" alt="">
-                    <h5>Breakfast</h5>
-                    <p>Start your day right with nutritious morning meals</p>
-                </div>
-                <div class="meals-homemeals-card">
-                    <img src="/hmeal2.png" alt="">
-                    <h5>Lunch</h5>
-                    <p>Energizing midday meals to fuel your afternoon</p>
-                </div>
-                <div class="meals-homemeals-card">
-                    <img src="/hmeal3.png" alt="">
-                    <h5>Dinner</h5>
-                    <p>Satisfying evening meals for perfect endings</p>
-                </div>
-            </div>
-        </div>
-    </div>
+            <div class="serve-container">
 
-    <div class="lives">
-        <div class="lives-left">
-            <h3>NOURISHING LIVES,</h3>
-            <h4>ONE MEAL AT A TIME</h4>
-            <ul>
-                <li><i class="bi bi-check2-circle"></i>Free delivery</li>
-                <li><i class="bi bi-check2-circle"></i>Hygiene food</li>
-                <li><i class="bi bi-check2-circle"></i>Quality wrapping</li>
-            </ul>
-        </div>
-        <div class="lives-right">
-            <img src="/bag.png" alt="">
-        </div>
-    </div>
+                <!-- TOP TEXT -->
+                <span class="serve-tag">HOW IT WORKS</span>
 
-    <div class="screen">
-        <div class="screen-left">
-            <img src="/screen.png" alt="">
-        </div>
-        <div class="screen-right">
-            <div class="screen-right-heading">
-                <h3>PROT<span class="red-text">MEALS</span></h3>
-            </div>
-            <div class="screen-right-because">
-                <p>Because Your Health Deserves a Routine</p>
-            </div>
-            <div class="screen-right-flex">
-                <p>Flexibility at your fingertips. Pick your meals, plans and
-                    timing just the way you want it.
+                <h2>What We Serve</h2>
+
+                <p class="serve-desc">
+                Product quality is our priority, and we always guarantee Halal and
+                safety until it is in your hands.
                 </p>
+
+
+                <!-- STEPS -->
+                <div class="steps">
+
+                <!-- CONNECTING LINE -->
+                <div class="line"></div>
+
+                <!-- STEP 1 -->
+                <div class="step">
+                    <div class="circle orange">
+                    <i class="bi bi-phone"></i>
+                    </div>
+
+                    <h3>Easy To Order</h3>
+
+                    <p>
+                    You only need a few steps in ordering
+                    food via our app.
+                    </p>
+                </div>
+
+
+                <!-- STEP 2 -->
+                <div class="step">
+                    <div class="circle red">
+                    <i class="bi bi-truck"></i>
+                    </div>
+
+                    <h3>Fastest Delivery</h3>
+
+                    <p>
+                    Delivery that is always on time,
+                    ensuring your food arrives hot.
+                    </p>
+                </div>
+
+
+                <!-- STEP 3 -->
+                <div class="step">
+                    <div class="circle green">
+                    <i class="bi bi-award"></i>
+                    </div>
+
+                    <h3>Best Quality</h3>
+
+                    <p>
+                    Not only fast, for us quality is also
+                    number one priority.
+                    </p>
+                </div>
+
+                </div>
+
             </div>
-            <div class="screen-right-cust">
-                <P>CUSTOMIZE YOUR MEALS</P>
+    </section>
+    <!-- section features -->
+    <section id="features" class="features">
+
+    <div class="features-container">
+
+            <!-- LEFT CONTENT -->
+            <div class="features-left">
+
+            <h2>
+                NOURISHING LIVES,<br>
+                <span>ONE MEAL AT A TIME</span>
+            </h2>
+
+            <ul class="features-list">
+                <li>Free delivery</li>
+                <li>Hygiene food</li>
+                <li>Quality wrapping</li>
+            </ul>
+
             </div>
-            <div class="screen-right-button">
-                <button (click)="goToMenu()">Tap here</button>
+
+
+            <!-- RIGHT IMAGE -->
+            <div class="features-right">
+            <img src="/meal-box.png" alt="Meal box">
             </div>
-        </div>
+    </div>
+</section>
+<!-- ABOUT SECTION -->
+<section class="about-section">
+  <div class="about-container">
+
+    <!-- DELIVERY CARD SECTION -->
+<div class="image-container">
+
+  <div class="delivery-card">
+
+    <!-- Person Image -->
+    <img
+      src="/delivery-boy.jpg"
+      alt="Delivery boy"
+      class="delivery-img"
+    />
+
+    <!-- Floating Badge -->
+    <div class="delivery-badge">
+      <h3>30+</h3>
+      <p>Minutes Delivery<br />Guarantee</p>
+    </div>
+    </div>
+  </div>
+    <!-- RIGHT CONTENT -->
+    <div class="about-content">
+      <span class="about-tag">ABOUT US</span>
+
+      <h2>ProMeals Delivery</h2>
+
+      <p>
+        ProMeals is an online food delivery service that provides healthy
+        and delicious meal plans delivered right to your doorstep.
+        We care about your health just like your mother does.
+      </p>
+
+      <p>
+        Our mission is to prepare homemade, hygienic, and sustaining
+        well-being food at the best price in your community.
+        Experience the joy of hassle-free nutrition.
+      </p>
+
+      <div class="cta-buttons">
+
+  <!-- Google Play -->
+  <button class="store-btn google">
+    <img src="/playstore.png" alt="Google Play" />
+    <div class="store-text">
+      <span class="small">GET IT ON</span>
+      <span class="big">Google Play</span>
+    </div>
+  </button>
+
+  <!-- App Store -->
+  <button class="store-btn apple">
+    <img src="/appstore.png" alt="App Store" />
+    <div class="store-text">
+      <span class="small">DOWNLOAD ON THE</span>
+      <span class="big">App Store</span>
+    </div>
+  </button>
+
+</div>
     </div>
 
-    <div class="test">
-        <div class="test-heading">
-            <h4>Hear From Those Who've Experienced the Best</h4>
+  </div>
+</section>
+<section class="categories-section">
+  <div class="container">
+    <h3 class="section-title">FOOD CATEGORIES</h3>
+    
+    <div class="categories-grid">
+      <div class="category-card">
+        <div class="icon-wrapper">
+            <i class="bi-egg-fried icon-style"></i> </div>
+        <p>Breakfast</p>
+       </div>
+
+      <div class="category-card">
+        <div class="icon-wrapper">
+            <i class="bi-box icon-style"></i> </div>
+        <p>Lunch</p>
         </div>
-        <div class="test-cards">
-            <div class="test-card" *ngFor="let card of testCards">
-                <div class="test-stars">
-                    <i class="bi bi-star-fill" *ngFor="let star of createStars(card.stars)"></i>
-                </div>
-                <div class="test-user">
-                    <img [src]="card.img" alt="{{ card.name }}">
-                    <div class="test-user-name">{{ card.name }}</div>
-                </div>
-                <div class="test-para">{{ card.para }}</div>
-            </div>
+
+      <div class="category-card">
+        <div class="icon-wrapper">
+          <i class="bi-cup-hot icon-style"></i> 
         </div>
+        <p>Dinner</p>
+      </div>
+
+      <div class="category-card">
+        <div class="icon-wrapper">
+          <i class="bi-cookie icon-style"></i>
+        </div>
+        <p>Snacks</p>
+      </div>
+
+      <div class="category-card">
+        <div class="icon-wrapper">
+          <i class="bi-heart-pulse icon-style"></i>
+        </div>
+        <p>Keto</p>
+      </div>
+
+      <div class="category-card">
+        <div class="icon-wrapper">
+          <i class="bi-cup-straw icon-style"></i>
+        </div>
+        <p>Beverages</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section class="plans-section" id="plans">
+  <div class="plans-header">
+    <span class="tag">OUR MENU</span>
+    <h2>Food Plans</h2>
+  </div>
+
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-top orange">
+        <div class="plan-info">
+          <h3>Standard Plan</h3>
+          <p>Per Month</p>
+        </div>
+        <img src="food3.jpg" class="food-thumb" alt="Standard">
+      </div>
+      <div class="plan-body">
+        <div class="price">₹3,999<span>/mo</span></div>
+        <ul>
+          <li>4 Veg Days</li>
+          <li>2 Non-Veg Days</li>
+          <li>Balanced Nutrition</li>
+          <li>Free Delivery</li>
+        </ul>
+        <button class="select-btn">Select Plan</button>
+      </div>
     </div>
 
-    <div class="happy">
-        <div class="happy-heading">
-            <h4>Prot<span>Meals</span> - A Bite of Happiness</h4>
+    <div class="plan-card">
+      <div class="plan-top red">
+        <span class="popular-badge">POPULAR</span>
+        <div class="plan-info">
+          <h3>Pro Plan</h3>
+          <p>Per Month</p>
         </div>
-        <p>Busy day? Don't compromise on your health or your happiness! ProtMeals brings you protein-packed, joy-filled
-            meals crafted for modern
-            lifestyles. Whether you're hustling at work, rushing between classes, or just need a wholesome pick-me-up,
-            ProtMeals delivers nourishing food
-            that feels like it was made just for you. With every bite, enjoy the perfect balance of taste, health, and
-            comfort. It's more than just
-            a meal—it's a moment of warmth and wellness. 🍽️ <br /> ProtMeals - because you deserve joy in every bite
-        </p>
-        <button (click)="goToMenu()">EXPLORE NOW</button>
+        <img src="food2.jpg" class="food-thumb" alt="Pro">
+      </div>
+      <div class="plan-body">
+        <div class="price">₹4,500<span>/mo</span></div>
+        <ul>
+          <li>7 Veg Days</li>
+          <li>Daily Salads</li>
+          <li>High Protein</li>
+          <li>Flexible Timing</li>
+        </ul>
+        <button class="select-btn">Select Plan</button>
+      </div>
     </div>
+
+    <div class="plan-card">
+      <div class="plan-top blue">
+        <div class="plan-info">
+          <h3>Customise</h3>
+          <p>Per Month</p>
+        </div>
+        <img src="food3.jpg" class="food-thumb" alt="Custom">
+      </div>
+      <div class="plan-body">
+        <div class="price">Flexible</div>
+        <ul>
+          <li>Choose Your Menu</li>
+          <li>Diet Specific</li>
+          <li>Allergen Free</li>
+          <li>Chat with Nutritionist</li>
+        </ul>
+        <button class="select-btn">Select Plan</button>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="app-showcase">
+  <div class="showcase-container">
+    
+    <div class="showcase-content">
+      <span class="app-badge">PROMEALS APP</span>
+      
+      <h1>We Care for Your Nutrition, Just like your Mother.</h1>
+      
+      <p>
+        Say hi to untimely eating schedules with ProMeals scheduled and 
+        healthy food delivery. Track your calories and manage your 
+        diet plans easily.
+      </p>
+
+      <div class="cta-buttons">
+
+  <!-- Google Play -->
+  <button class="store-btn google">
+    <img src="/playstore.png" alt="Google Play" />
+    <div class="store-text">
+      <span class="small">GET IT ON</span>
+      <span class="big">Google Play</span>
+    </div>
+  </button>
+
+  <!-- App Store -->
+  <button class="store-btn apple">
+    <img src="/appstore.png" alt="App Store" />
+    <div class="store-text">
+      <span class="small">DOWNLOAD ON THE</span>
+      <span class="big">App Store</span>
+    </div>
+  </button>
+
+</div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section class="why">
+
+
+  <div class="why-header">
+    <p class="tag">WHY CHOOSE US</p>
+    <h2>The best food for you at affordable prices</h2>
+  </div>
+
+  <div class="why-grid">
+
+    <!-- item -->
+    <div class="why-card">
+
+  <div class="icon-box">
+    <i class="bi bi-person"></i>
+  </div>
+  <h3>Personalized Plans</h3>
+  <p>Tailor made plans specifically for your needs.</p>
+
+</div>
+
+<div class="why-card">
+
+  <div class="icon-box">
+    <i class="bi bi-truck"></i>
+  </div>
+  <h3>Free and on Time Delivery</h3>
+  <p>No extra charges for delivery.</p>
+
+</div>
+
+<div class="why-card">
+
+  <div class="icon-box">
+    <i class="bi bi-shield-check"></i>
+  </div>
+  <h3>Hygiene and Safe Packaging</h3>
+  <p>Safety first packaging.</p>
+
+</div>
+
+<div class="why-card">
+
+  <div class="icon-box">
+    <i class="bi bi-plus-lg"></i>
+  </div>
+  <h3>Add-on Facility</h3>
+  <p>Add more items anytime.</p>
+
+</div>
+
+<div class="why-card">
+
+  <div class="icon-box">
+    <i class="bi bi-heart"></i>
+  </div>
+  <h3>Meals for the Day</h3>
+  <p>Healthy options all day.</p>
+
+</div>
+
+<div class="why-card">
+
+  <div class="icon-box">
+    <i class="bi bi-clock"></i>
+  </div>
+  <h3>Easy Regulation</h3>
+  <p>Control via app.</p>
+
+</div>
+
+  </div>
+
+</section>
+
+
+    
 
 </div>
 

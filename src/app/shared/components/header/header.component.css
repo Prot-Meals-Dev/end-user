@@ -1,0 +1,263 @@
+/* ================= NAVBAR ================= */
+
+.navbar{
+  width:100%;
+  padding:20px 34px;
+  background: rgba(193, 40, 45, 1);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+/* LEFT + RIGHT TAKE SAME SPACE */
+.nav-left,
+.nav-right{
+  flex:1;
+  display:flex;
+  align-items:center;
+}
+
+/* LEFT */
+.nav-left{
+  justify-content:flex-start;
+}
+
+.logo{
+  height:60px;
+  cursor:pointer;
+}
+
+.nav-center{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  gap:48px;              /* ⭐ exact premium spacing */
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.nav-center a{
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:500;
+  letter-spacing:.2px;
+  position:relative;
+  transition: color .25s ease;   /* smooth hover */
+}
+.nav-center a::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  bottom:-6px;
+  width:0%;
+  height:2px;
+  background:#f4b740;
+  transform:translateX(-50%);
+  transition:width .3s ease;
+}
+.nav-center a:hover::after{
+  width:100%;
+}
+
+/* ⭐ TEXT HOVER */
+.nav-center a:hover{
+  color:#f4b740;
+}
+.nav-center a.active{
+  color:#f4b740;
+  font-weight:600;
+}
+/* RIGHT */
+.nav-right{
+  justify-content:flex-end;
+  gap:18px;
+}
+
+/* BUTTONS */
+.login-btn,
+.call-btn,
+.whatsapp-btn{
+  border:none;
+  padding:8px 18px;   /* ⭐ MAGIC NUMBER */
+  border-radius:999px;
+  color:white;
+  font-weight:500;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.login-btn{
+  background:#ff4d4d;
+}
+
+.call-btn{
+  background:#f4a62a;
+}
+
+.whatsapp-btn{
+  background:#4caf50;
+}
+
+/* PROFILE */
+.profile{
+  position:relative;
+}
+
+.dropdown{
+  position:absolute;
+  right:0;
+  top:50px;
+  background:white;
+  border-radius:12px;
+  min-width:170px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.dropdown span{
+  display:block;
+  padding:12px;
+}
+
+.logout{
+  color:red;
+}
+.mobile-controls{
+  display:none;
+  align-items:center;
+  gap:10px;
+}
+
+/* Small Login */
+.mobile-login{
+  padding:6px 12px;
+  font-size:13px;
+  border-radius:20px;
+}
+
+/* Hamburger */
+.hamburger{
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+@media (min-width:768px) and (max-width:1023px){
+
+  .navbar{
+    padding:16px 20px;
+  }
+
+  .logo{
+    height:50px;
+  }
+
+  .nav-center{
+    gap:28px;
+  }
+
+  .nav-center a{
+    font-size:13px;
+  }
+
+  .login-btn,
+  .call-btn,
+  .whatsapp-btn{
+    padding:6px 14px;
+    font-size:13px;
+  }
+}
+@media (max-width:767px){
+
+  .navbar{
+    padding:14px 18px;
+    position:relative;
+  }
+
+  /* SHOW hamburger */
+  .hamburger{
+    display:block;
+  }
+
+  /* -------- MOBILE MENU -------- */
+  .nav-center{
+    position:absolute;
+    top:70px;
+    left:0;
+
+    width:100%;
+    background:rgba(193,40,45,1);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+
+    padding:22px 0;
+
+    /* animation (NO BLINK) */
+    transform:translateY(-15px);
+    opacity:0;
+    pointer-events:none;
+
+    transition:all .3s ease;
+    z-index:999;
+  }
+  .nav-center li{
+  width:100%;
+  text-align:center;
+}
+
+.nav-center a{
+  display:block;
+  width:100%;
+  padding:14px 0;
+  font-size:18px;
+}
+
+/* OPEN */
+  .nav-center.open{
+    transform:translateY(0);
+    opacity:1;
+    pointer-events:auto;
+  }
+  /* mobile link style */
+  .nav-center a{
+    display:block;
+    width:100%;
+    text-align:center;
+    padding:14px 0;
+    font-size:18px;
+  }
+
+  .nav-left{
+    flex:none;
+  }
+
+  .nav-center{
+    gap:18px;
+  }
+
+.nav-center.open{
+  max-height:500px;
+  padding:20px 0;
+}
+
+
+  .login-btn,
+  .call-btn,
+  .whatsapp-btn{
+    width:80%;
+    text-align:center;
+  }
+  .mobile-controls{
+    display:flex;
+  }
+  .nav-right{
+    display:none;
+  }
+
+
+}

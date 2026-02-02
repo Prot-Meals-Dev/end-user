@@ -1,68 +1,91 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="/logo.png" alt="Logo" height="100px" class="d-inline-block align-text-top">
-        </a>
+<nav class="navbar">
 
-        <!-- Toggler + Mobile Login button -->
-        <div class="d-flex align-items-center gap-2 d-lg-none">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- Mobile only login -->
-            <div *ngIf="isLoggedIn; else loginBtnMobile" class="dropdown d-lg-none">
-                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person-circle"></i>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li type="button" class="dropdown-item" (click)="goTo('/profile')">My Profile</li>
-                    <li type="button" class="dropdown-item" (click)="goTo('/orders')">My Orders</li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item text-danger" href="#" (click)="logout()">Log out</a></li>
-                </ul>
-            </div>
+  <!-- LEFT -->
+  <div class="nav-left">
+    <img src="/logo.png" class="logo" (click)="goTo('/')">
+  </div>
 
-            <ng-template #loginBtnMobile>
-                <button class="btn btn-danger d-lg-none" (click)="openLogin()">Login</button>
-            </ng-template>
+<!-- RIGHT MOBILE CONTROLS -->
+  <div class="mobile-controls">
+
+    <!-- Small Login -->
+    <button 
+      class="login-btn mobile-login"
+      *ngIf="!isLoggedIn"
+      (click)="openLogin()">
+      Login
+    </button>
+
+    <!-- Hamburger -->
+    <button class="hamburger" (click)="toggleMenu()">
+      ☰
+    </button>
+
+  </div>
+
+
+  <!-- CENTER -->
+  <ul class="nav-center" [class.open]="menuOpen">
+
+    <li>
+      <a (click)="goTo('/'); toggleMenu()">Home</a>
+    </li>
+
+    <li>
+      <a (click)="scrollToSection('about'); toggleMenu()">About Us</a>
+    </li>
+
+    <li>
+      <a (click)="scrollToSection('features'); toggleMenu()">Features</a>
+    </li>
+
+    <li>
+      <a (click)="scrollToSection('plans'); toggleMenu()">Plans</a>
+    </li>
+
+  </ul>
+
+
+  <!-- RIGHT -->
+  <div class="nav-right" >
+
+    <!-- Logged In -->
+    <ng-container *ngIf="isLoggedIn; else loginBtn">
+
+      <div class="profile">
+
+        <div class="avatar" (click)="toggleDropdown()">
+          👤
         </div>
 
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <div class="d-flex ms-auto align-items-center flex-column flex-lg-row gap-3 mt-3 mt-lg-0">
-                <ul class="navbar-nav d-flex flex-row gap-3 mb-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="cursor: pointer;" (click)="scrollToSection('about')">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="cursor: pointer;" (click)="scrollToSection('meals')">Categories</a>
-                    </li>
-                </ul>
-
-                <!-- Desktop only login -->
-                <div *ngIf="isLoggedIn; else loginButton" class="dropdown d-none d-lg-block">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li type="button" class="dropdown-item" (click)="goTo('/profile')">My Profile</li>
-                        <li type="button" class="dropdown-item" (click)="goTo('/orders')">My Orders</li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item text-danger" href="#" (click)="logout()">Log out</a></li>
-                    </ul>
-                </div>
-
-                <ng-template #loginButton>
-                    <button class="btn btn-danger d-none d-lg-block" (click)="openLogin()">Login</button>
-                </ng-template>
-            </div>
+        <div class="dropdown" *ngIf="dropdownOpen">
+          <span (click)="goTo('/profile'); toggleMenu()">My Profile</span>
+          <span (click)="goTo('/orders'); toggleMenu()">My Orders</span>
+          <span class="logout" (click)="logout()">Logout</span>
         </div>
-    </div>
+
+      </div>
+
+    </ng-container>
+
+
+    <!-- Login -->
+    <ng-template #loginBtn>
+      <button class="login-btn" (click)="openLogin(); toggleMenu()">
+        Login
+      </button>
+    </ng-template>
+
+
+    <!-- CTA Buttons -->
+    <button class="call-btn">
+      📞 Call Us
+    </button>
+
+    <button class="whatsapp-btn">
+      💬 WhatsApp
+    </button>
+
+  </div>
+
 </nav>
