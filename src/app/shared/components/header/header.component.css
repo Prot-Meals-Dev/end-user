@@ -4,12 +4,16 @@
   width:100%;
   padding:20px 34px;
   background: rgba(193, 40, 45, 1);
+
   display:flex;
   align-items:center;
   justify-content:space-between;
-  position:sticky;   /* ⭐ makes sticky */
-  top:0;             /* stick to top */
-  z-index:1000;  
+
+  position:sticky;   /* ⭐ change here */
+  top:0;
+  left:0;
+
+  z-index:1000;
 }
 
 /* LEFT + RIGHT TAKE SAME SPACE */
@@ -84,13 +88,19 @@
 .call-btn,
 .whatsapp-btn{
   border:none;
-  padding:8px 18px;   /* ⭐ MAGIC NUMBER */
+  padding:10px 20px;   /* ⭐ MAGIC NUMBER */
   border-radius:999px;
   color:white;
   font-weight:500;
   font-size:14px;
   cursor:pointer;
+
+  display:flex;            /* ⭐ add */
+  align-items:center;      /* ⭐ center vertically */
+  justify-content:center;  /* ⭐ center horizontally */
+  gap:8px;   
 }
+
 
 .login-btn{
   background:#ff4d4d;
@@ -147,7 +157,10 @@
   border:none;
   cursor:pointer;
 }
-
+/* hide by default (desktop/tablet) */
+.mobile-only{
+  display:none;
+}
 /* ================= RESPONSIVE DESIGN ================= */
 
 /* 1. TABLET / SMALL LAPTOP (1024px) */
@@ -173,7 +186,7 @@
   }
 
   .nav-center a{
-    font-size:12px;
+    font-size:14px;
     white-space:nowrap;
   }
 
@@ -183,38 +196,22 @@
     font-size:12px;
   }
 
-  /* ⭐ MAKE CALL/WHATSAPP ICON ONLY */
+  
+  
+.call-btn span,
+.whatsapp-btn span{
+  display:none;
+}
+
+  /* shrink padding so it looks clean */
   .call-btn,
   .whatsapp-btn{
-    width:36px;
-    height:36px;
-    padding:0;
-
-    display:flex;
-    align-items:center;
+    padding:4px;
+    width:48px;
+    height:28px;
     justify-content:center;
-
-    border-radius:50%;
-    font-size:18px;
-
-    /* hide text */
-    text-indent:-9999px;
-    overflow:hidden;
-    position:relative;
   }
 
-  /* show emoji icon centered */
-  .call-btn::before{
-    content:"📞";
-    text-indent:0;
-    position:absolute;
-  }
-
-  .whatsapp-btn::before{
-    content:"💬";
-    text-indent:0;
-    position:absolute;
-  }
 
 }
 
@@ -231,6 +228,26 @@
   .nav-left {
     flex: 1;
   }
+  .mobile-only{
+    display:block;
+    width:100%;
+    text-align:center;
+    padding:12px 20px;
+  }
+
+  .mobile-only button{
+  width:100%;
+  padding:16px 18px;
+
+  border-radius:12px;
+  font-size:13px;
+  font-weight:600;
+
+  display:flex;                /* ⭐ key */
+  align-items:center;          /* vertical center */
+  justify-content:center;      /* horizontal center */
+  gap:10px;                   /* space between icon + text */
+}
 
   /* The Mobile Menu Drawer */
   .nav-center {
@@ -240,7 +257,7 @@
     width: 100%;
     background: rgba(193, 40, 45, 0.98);
     flex-direction: column;
-    padding: 20px 0;
+    padding:  0;
     gap: 0; /* Managed by <a> padding */
     
     /* Animation: Slide and Fade */
@@ -250,11 +267,12 @@
     transition: all 0.3s ease-in-out;
     box-shadow: 0 10px 20px rgba(0,0,0,0.15);
   }
-
+  
   .nav-center.open {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+    
   }
 
   .nav-center li {

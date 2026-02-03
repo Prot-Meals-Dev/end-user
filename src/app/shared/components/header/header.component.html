@@ -24,30 +24,43 @@
   </div>
 
 
-  <!-- CENTER -->
   <ul class="nav-center" [class.open]="menuOpen">
 
-    <li>
-      <a (click)="goTo('/'); toggleMenu()">Home</a>
-    </li>
+  <li>
+    <a (click)="goTo('/'); toggleMenu()">Home</a>
+  </li>
 
-    <li>
-      <a (click)="scrollToSection('about'); toggleMenu()">About Us</a>
-    </li>
+  <li>
+    <a (click)="scrollToSection('about'); toggleMenu()">About Us</a>
+  </li>
 
-    <li>
-      <a (click)="scrollToSection('features'); toggleMenu()">Features</a>
-    </li>
+  <li>
+    <a (click)="scrollToSection('features'); toggleMenu()">Features</a>
+  </li>
 
-    <li>
-      <a (click)="scrollToSection('plans'); toggleMenu()">Plans</a>
-    </li>
+  <li>
+    <a (click)="scrollToSection('plans'); toggleMenu()">Plans</a>
+  </li>
 
-  </ul>
+  <!-- ⭐ MOBILE ONLY BUTTONS -->
+  <li class="mobile-only">
+    <button class="call-btn" (click)="goTo('/contact'); toggleMenu()">
+      📞 Call Us
+    </button>
+  </li>
+
+  <li class="mobile-only">
+    <button class="whatsapp-btn" (click)="goTo('/whatsapp'); toggleMenu()">
+      💬 WhatsApp
+    </button>
+  </li>
+
+</ul>
 
 
   <!-- RIGHT -->
   <div class="nav-right" >
+
 
     <!-- Logged In -->
     <ng-container *ngIf="isLoggedIn; else loginBtn">
@@ -78,12 +91,14 @@
 
 
     <button class="call-btn" (click)="goTo('/contact')">
-    📞 Call Us
-    </button>
+  <i class="bi bi-telephone-fill"></i>
+   <span>Call Us</span>
+</button>
 
-    <button class="whatsapp-btn" (click)="goTo('/whatsapp')">
-    💬 WhatsApp
-    </button>
+<button class="whatsapp-btn" (click)="goTo('/whatsapp')">
+  <i class="bi bi-whatsapp"></i>
+  <span>whatsapp</span>
+</button>
 
   </div>
 

@@ -34,6 +34,7 @@
   max-width:680px;
   color:white;
   margin-bottom: 40px;
+  
 }
 .badge{
   display:inline-block;
@@ -55,7 +56,7 @@
 }
 
 .hero-left h1{
-  font-size:84px;
+  font-size:74px;
   line-height:1.09;
   font-weight:800;
   margin-bottom:28px;
@@ -78,6 +79,7 @@
   display: flex;
   gap: 20px;
   align-items: center;
+  margin-top: 24px;
 }
 
 /* Base button styles to ensure they look identical in shape */
@@ -114,7 +116,7 @@
   justify-content:center;
   position:relative;
   margin-bottom:60px;
-  margin-left: 30px;
+  margin-left: 70px;
 }
 /* image */
 /* make wrapper parent for badge */
@@ -255,6 +257,7 @@
   width:100%;
   padding-left:0;
   justify-content:center;
+  margin-left: 10px;
 }
 
 .circle-wrapper{
@@ -350,7 +353,9 @@
   font-size:30px;
   line-height:1.3;
 }
-
+.hero-right{
+    margin-left: 5px;
+}
 .hero-left p{
   font-size:14px;
 }
@@ -861,26 +866,58 @@
   line-height: 1.7;
   margin-bottom: 14px;
 }
-/* ================= 1024px ================= */
+/* ================= TABLET (<=1024px) ================= */
 @media (max-width:1024px){
 
   .about-container{
-    gap:40px;
-    padding:0 24px;
+    grid-template-columns: 1fr;   /* ⭐ stack like mobile */
+    gap: 40px;
+    text-align: center;           /* ⭐ center everything */
+    padding: 0 24px;
   }
 
+  /* order (text first, image second) */
+  .about-content{
+    order: 1;
+  }
+
+  .image-container{
+    order: 2;
+    margin: auto;
+  }
+
+  /* center text */
   .about-content h2{
-    font-size:34px;
+    font-size: 32px;
+    margin: 12px auto 18px;
   }
 
+  .about-content p{
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ⭐ center store buttons */
+  .cta-buttons{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  /* ⭐ center card */
   .delivery-card{
-    height:280px;
+    height: 280px;
+    max-width: 420px;
+    margin: auto;
   }
 
+  /* ⭐ badge centered under image */
   .delivery-badge{
-    left:24px;
-    bottom:12px;
-    padding:10px 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -12px;
   }
 }
 

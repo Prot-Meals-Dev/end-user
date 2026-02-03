@@ -213,4 +213,8 @@ section{
     padding: 12px;
     font-size: 14px;
   }
+  .footer-bottom{
+  flex-direction: column-reverse;
+}
+
 }
