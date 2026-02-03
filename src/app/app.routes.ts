@@ -12,6 +12,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { SuccessComponent } from './pages/success/success.component';
 import { FailComponent } from './pages/fail/fail.component';
 import { authGuard } from './core/guard/auth.guard';
+import { WhatsappComponent } from './pages/whatsapp/whatsapp.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -27,5 +28,7 @@ export const routes: Routes = [
     { path: 'contact', component: ContactComponent },
     { path: 'success', component: SuccessComponent },
     { path: 'failed', component: FailComponent },
+    { path: 'whatsapp', component: WhatsappComponent },
     { path: '**', component: HomeComponent }
+
 ];

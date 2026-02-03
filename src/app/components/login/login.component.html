@@ -10,11 +10,29 @@
 
     <form *ngIf="isLogin" [formGroup]="otpForm" (ngSubmit)="onSubmit()" class="otp-form">
         <div class="input-group email-input">
-            <span class="input-icon"><i class="bi bi-envelope text-danger"></i></span>
-            <input formControlName="email" type="email" placeholder="Enter your email" required />
-        </div>
+    <span class="input-icon">
+        <i class="bi bi-envelope text-danger"></i>
+    </span>
 
-        <button type="button" class="send-otp-btn" (click)="sendOtp()" *ngIf="!isOtpSent" [disabled]="isSendingOtp">
+    <input
+        formControlName="email"
+        type="email"
+        placeholder="Enter your email *"
+    />
+</div>
+
+        <!-- ✅ ERROR MESSAGES -->
+        <small class="error"
+        *ngIf="otpForm.get('email')?.touched && otpForm.get('email')?.errors?.['required']">
+        Email is required
+        </small>
+
+        <small class="error"
+        *ngIf="otpForm.get('email')?.touched && otpForm.get('email')?.errors?.['email']">
+        Enter valid email
+        </small>
+
+        <button type="button" class="send-otp-btn" (click)="sendOtp()" *ngIf="!isOtpSent" >
             <ng-container *ngIf="!isSendingOtp; else loadingTpl">Send OTP</ng-container>
         </button>
 
@@ -42,20 +60,77 @@
 
     </form>
 
-    <form *ngIf="!isLogin" [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()" class="otp-form signup-form">
-        <input formControlName="firstName" type="text" placeholder="First Name" />
-        <input formControlName="lastName" type="text" placeholder="Last Name" />
-        <input formControlName="phone" type="text" placeholder="Phone Number" />
-        <input formControlName="email" type="email" placeholder="Email Address" />
-        <select formControlName="region">
-            <option value="" disabled selected>Select Region</option>
-            <option *ngFor="let region of allRegions" [value]="region.id">{{ region.name }} ({{ region.city }}, {{
-                region.state }})</option>
-        </select>
-        <textarea formControlName="address" placeholder="Address"></textarea>
+    <form *ngIf="!isLogin"
+      [formGroup]="signupForm"
+      (ngSubmit)="onSignupSubmit()"
+      class="otp-form signup-form">
 
-        <button type="submit" class="send-otp-btn">Sign Up</button>
-    </form>
+  <!-- FIRST NAME -->
+  <input formControlName="firstName" type="text" placeholder="First Name *" />
+  <small class="error"
+    *ngIf="signupForm.get('firstName')?.touched && signupForm.get('firstName')?.invalid">
+    First name is required
+  </small>
+
+
+  <!-- LAST NAME -->
+  <input formControlName="lastName" type="text" placeholder="Last Name *" />
+  <small class="error"
+    *ngIf="signupForm.get('lastName')?.touched && signupForm.get('lastName')?.invalid">
+    Last name is required
+  </small>
+
+
+  <!-- PHONE -->
+  <input formControlName="phone" type="text" placeholder="Phone Number *" />
+  <small class="error"
+    *ngIf="signupForm.get('phone')?.touched && signupForm.get('phone')?.errors?.['required']">
+    Phone number is required
+  </small>
+  <small class="error"
+    *ngIf="signupForm.get('phone')?.touched && signupForm.get('phone')?.errors?.['pattern']">
+    Enter valid 10 digit phone
+  </small>
+
+
+  <!-- EMAIL -->
+  <input formControlName="email" type="email" placeholder="Email Address *" />
+  <small class="error"
+    *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.errors?.['required']">
+    Email is required
+  </small>
+  <small class="error"
+    *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.errors?.['email']">
+    Enter valid email
+  </small>
+
+
+  <!-- REGION -->
+  <select formControlName="region">
+    <option value="" disabled>Select Region *</option>
+    <option *ngFor="let region of allRegions" [value]="region.id">
+      {{ region.name }} ({{ region.city }}, {{ region.state }})
+    </option>
+  </select>
+  <small class="error"
+    *ngIf="signupForm.get('region')?.touched && signupForm.get('region')?.invalid">
+    Please select region
+  </small>
+
+
+  <!-- ADDRESS -->
+  <textarea formControlName="address" placeholder="Address *"></textarea>
+  <small class="error"
+    *ngIf="signupForm.get('address')?.touched && signupForm.get('address')?.invalid">
+    Address is required
+  </small>
+
+
+  <button type="submit" class="send-otp-btn">
+    Sign Up
+  </button>
+
+</form>
 
     <p class="signup-text" (click)="toggleForm()">
         {{ isLogin ? 'Not a user? Sign Up' : 'Already have an account? Login' }}

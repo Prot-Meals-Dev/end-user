@@ -1,8 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
-html {
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;   /* ⭐ prevents side gap forever */
   scroll-behavior: smooth;
 }
+
 body{
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ⭐ Angular root fix (VERY IMPORTANT) */
+app-root{
+  display:block;
+  width:100%;
+}
+
+router-outlet{
+  display:block;
+  width:100%;
 }

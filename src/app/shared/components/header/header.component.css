@@ -7,6 +7,9 @@
   display:flex;
   align-items:center;
   justify-content:space-between;
+  position:sticky;   /* ⭐ makes sticky */
+  top:0;             /* stick to top */
+  z-index:1000;  
 }
 
 /* LEFT + RIGHT TAKE SAME SPACE */
@@ -145,120 +148,153 @@
   cursor:pointer;
 }
 
-@media (min-width:768px) and (max-width:1023px){
+/* ================= RESPONSIVE DESIGN ================= */
 
+/* 1. TABLET / SMALL LAPTOP (1024px) */
+/* ================= MOBILE + TABLET MENU ================= */
+
+  /* ================= TABLET (<=1024px) ================= */
+/* ================= TABLET FIX (<=1024px) ================= */
+@media (max-width:1024px){
+
+  /* shrink navbar */
   .navbar{
-    padding:16px 20px;
+    padding:10px 14px;
   }
 
+  /* smaller logo */
   .logo{
-    height:50px;
+    height:40px;
   }
 
+  /* tighter links */
   .nav-center{
-    gap:28px;
+    gap:12px;
   }
 
   .nav-center a{
-    font-size:13px;
+    font-size:12px;
+    white-space:nowrap;
   }
 
-  .login-btn,
+  /* smaller login */
+  .login-btn{
+    padding:4px 10px;
+    font-size:12px;
+  }
+
+  /* ⭐ MAKE CALL/WHATSAPP ICON ONLY */
   .call-btn,
   .whatsapp-btn{
-    padding:6px 14px;
-    font-size:13px;
-  }
-}
-@media (max-width:767px){
+    width:36px;
+    height:36px;
+    padding:0;
 
-  .navbar{
-    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+    font-size:18px;
+
+    /* hide text */
+    text-indent:-9999px;
+    overflow:hidden;
     position:relative;
   }
 
-  /* SHOW hamburger */
-  .hamburger{
-    display:block;
-  }
-
-  /* -------- MOBILE MENU -------- */
-  .nav-center{
+  /* show emoji icon centered */
+  .call-btn::before{
+    content:"📞";
+    text-indent:0;
     position:absolute;
-    top:70px;
-    left:0;
-
-    width:100%;
-    background:rgba(193,40,45,1);
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:18px;
-
-    padding:22px 0;
-
-    /* animation (NO BLINK) */
-    transform:translateY(-15px);
-    opacity:0;
-    pointer-events:none;
-
-    transition:all .3s ease;
-    z-index:999;
   }
-  .nav-center li{
-  width:100%;
-  text-align:center;
+
+  .whatsapp-btn::before{
+    content:"💬";
+    text-indent:0;
+    position:absolute;
+  }
+
 }
 
-.nav-center a{
-  display:block;
-  width:100%;
-  padding:14px 0;
-  font-size:18px;
+/* 2. MOBILE & SMALL TABLETS (720px) */
+@media (max-width: 767px) {
+  .mobile-controls {
+    display: flex; /* Show Hamburger and Mini Login */
+  }
+
+  .nav-right {
+    display: none; /* Hide the desktop buttons container */
+  }
+
+  .nav-left {
+    flex: 1;
+  }
+
+  /* The Mobile Menu Drawer */
+  .nav-center {
+    position: absolute;
+    top: 100%; /* Sits directly under the navbar */
+    left: 0;
+    width: 100%;
+    background: rgba(193, 40, 45, 0.98);
+    flex-direction: column;
+    padding: 20px 0;
+    gap: 0; /* Managed by <a> padding */
+    
+    /* Animation: Slide and Fade */
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  }
+
+  .nav-center.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-center li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-center a {
+    display: block;
+    padding: 15px 0;
+    font-size: 17px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .nav-center a::after {
+    display: none; /* Hide the hover underline on mobile for a cleaner look */
+  }
 }
 
-/* OPEN */
-  .nav-center.open{
-    transform:translateY(0);
-    opacity:1;
-    pointer-events:auto;
-  }
-  /* mobile link style */
-  .nav-center a{
-    display:block;
-    width:100%;
-    text-align:center;
-    padding:14px 0;
-    font-size:18px;
+/* 3. SMALL MOBILE (460px) */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 12px 15px;
   }
 
-  .nav-left{
-    flex:none;
+  .logo {
+    height: 42px;
   }
 
-  .nav-center{
-    gap:18px;
+  .hamburger {
+    font-size: 22px;
   }
 
-.nav-center.open{
-  max-height:500px;
-  padding:20px 0;
-}
-
-
-  .login-btn,
-  .call-btn,
-  .whatsapp-btn{
-    width:80%;
-    text-align:center;
-  }
-  .mobile-controls{
-    display:flex;
-  }
-  .nav-right{
-    display:none;
+  .mobile-login {
+    padding: 5px 12px;
+    font-size: 12px;
   }
 
-
+  .nav-center a {
+    font-size: 16px;
+    padding: 12px 0;
+  }
 }

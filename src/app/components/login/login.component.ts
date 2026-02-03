@@ -71,11 +71,19 @@ export class LoginComponent implements OnInit {
   }
 
   sendOtp() {
-    if (this.otpForm.get('email')?.invalid || this.isOtpSent || this.isSendingOtp) return;
+  const emailControl = this.otpForm.get('email');
 
-    const email = this.otpForm.get('email')?.value;
-    this.startOtpFlow(email);
+  if (this.otpForm.invalid) {
+    this.otpForm.markAllAsTouched();   // ⭐ safer
+    return;
   }
+
+
+  if (this.isOtpSent || this.isSendingOtp) return;
+
+  const email = emailControl?.value;
+  this.startOtpFlow(email);
+}
 
   resendOtp() {
     if (this.isSendingOtp) return;

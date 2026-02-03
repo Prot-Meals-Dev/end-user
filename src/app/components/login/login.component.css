@@ -33,6 +33,28 @@
     gap: 1rem;
     animation: fadeIn 0.3s ease-in-out;
 }
+.error{
+  color:#e53935;
+  font-size:12px;
+  margin-top:6px;
+  display:block;
+}
+
+input.ng-invalid.ng-touched{
+  border:1px solid #e53935;
+}
+.error{
+  color:#e53935;
+  font-size:12px;
+  margin-top:4px;
+  display:block;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched{
+  border:1px solid #e53935;
+}
 
 @keyframes fadeIn {
     from {
